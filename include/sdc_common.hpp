@@ -4,7 +4,7 @@
 #include "sdcparse.hpp"
 #include "sdc_lexer.hpp"
 
-namespace sdcparse {
+namespace vhdcparse {
 
 enum class TimingDerateTargetType {
     NET,

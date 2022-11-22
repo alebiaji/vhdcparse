@@ -36,7 +36,7 @@
     //Bison calls sdcparse_lex() to get the next token.
     //We use the VHdc_Lexer class as the interface to the lexer, so we
     //re-defined the function to tell Bison how to get the next token.
-    static sdcparse::VHdc_Parser::symbol_type sdcparse_lex(sdcparse::VHdc_Lexer& lexer) {
+    static vhdcparse::VHdc_Parser::symbol_type sdcparse_lex(vhdcparse::VHdc_Lexer& lexer) {
         return lexer.next_token();
     }
 
@@ -56,7 +56,7 @@
 #include "../include/sdc_common.hpp"
 #include "../include/sdc_error.hpp"
 
-using namespace sdcparse;
+using namespace vhdcparse;
 
 
 #line 63 "/home/ale/git/VHawk/third_party/sdcparse/gen/sdc_parser.gen.cpp" // lalr1.cc:404
@@ -139,7 +139,7 @@ using namespace sdcparse;
 #define YYRECOVERING()  (!!yyerrstatus_)
 
 #line 34 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_parser.y" // lalr1.cc:479
-namespace sdcparse {
+namespace vhdcparse {
 #line 144 "/home/ale/git/VHawk/third_party/sdcparse/gen/sdc_parser.gen.cpp" // lalr1.cc:479
 
   /* Return YYSTR after stripping away unnecessary quotes and
@@ -843,7 +843,7 @@ namespace sdcparse {
   case 22:
 #line 200 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_parser.y" // lalr1.cc:859
     { yylhs.value.as< CreateClock > () = yystack_[1].value.as< CreateClock > (); sdc_create_clock_add_targets(callback, lexer, yylhs.value.as< CreateClock > (), 
-                                                                        make_sdc_string_group(sdcparse::StringGroupType::STRING, yystack_[0].value.as< std::string > ())); 
+                                                                        make_sdc_string_group(vhdcparse::StringGroupType::STRING, yystack_[0].value.as< std::string > ())); 
                                                             }
 #line 849 "/home/ale/git/VHawk/third_party/sdcparse/gen/sdc_parser.gen.cpp" // lalr1.cc:859
     break;
@@ -947,7 +947,7 @@ namespace sdcparse {
   case 39:
 #line 225 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_parser.y" // lalr1.cc:859
     { yylhs.value.as< SetClockGroups > () = yystack_[2].value.as< SetClockGroups > (); sdc_set_clock_groups_add_group(callback, lexer, yylhs.value.as< SetClockGroups > (), 
-                                                                    make_sdc_string_group(sdcparse::StringGroupType::STRING, yystack_[0].value.as< std::string > ())); 
+                                                                    make_sdc_string_group(vhdcparse::StringGroupType::STRING, yystack_[0].value.as< std::string > ())); 
                                                             }
 #line 953 "/home/ale/git/VHawk/third_party/sdcparse/gen/sdc_parser.gen.cpp" // lalr1.cc:859
     break;
@@ -985,7 +985,7 @@ namespace sdcparse {
   case 45:
 #line 235 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_parser.y" // lalr1.cc:859
     { yylhs.value.as< SetFalsePath > () = yystack_[2].value.as< SetFalsePath > (); sdc_set_false_path_add_to_from_group(callback, lexer, yylhs.value.as< SetFalsePath > (), 
-                                                                    make_sdc_string_group(sdcparse::StringGroupType::STRING, yystack_[0].value.as< std::string > ()), 
+                                                                    make_sdc_string_group(vhdcparse::StringGroupType::STRING, yystack_[0].value.as< std::string > ()), 
                                                                     FromToType::FROM); 
                                                             }
 #line 992 "/home/ale/git/VHawk/third_party/sdcparse/gen/sdc_parser.gen.cpp" // lalr1.cc:859
@@ -994,7 +994,7 @@ namespace sdcparse {
   case 46:
 #line 239 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_parser.y" // lalr1.cc:859
     { yylhs.value.as< SetFalsePath > () = yystack_[2].value.as< SetFalsePath > (); sdc_set_false_path_add_to_from_group(callback, lexer, yylhs.value.as< SetFalsePath > (), 
-                                                                    make_sdc_string_group(sdcparse::StringGroupType::STRING, yystack_[0].value.as< std::string > ()), 
+                                                                    make_sdc_string_group(vhdcparse::StringGroupType::STRING, yystack_[0].value.as< std::string > ()), 
                                                                     FromToType::TO  ); 
                                                             }
 #line 1001 "/home/ale/git/VHawk/third_party/sdcparse/gen/sdc_parser.gen.cpp" // lalr1.cc:859
@@ -1039,7 +1039,7 @@ namespace sdcparse {
   case 53:
 #line 251 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_parser.y" // lalr1.cc:859
     { yylhs.value.as< SetMinMaxDelay > () = yystack_[2].value.as< SetMinMaxDelay > (); sdc_set_min_max_delay_add_to_from_group(callback, lexer, yylhs.value.as< SetMinMaxDelay > (), 
-                                                                    make_sdc_string_group(sdcparse::StringGroupType::STRING, yystack_[0].value.as< std::string > ()), 
+                                                                    make_sdc_string_group(vhdcparse::StringGroupType::STRING, yystack_[0].value.as< std::string > ()), 
                                                                     FromToType::FROM);
                                                             }
 #line 1046 "/home/ale/git/VHawk/third_party/sdcparse/gen/sdc_parser.gen.cpp" // lalr1.cc:859
@@ -1048,7 +1048,7 @@ namespace sdcparse {
   case 54:
 #line 255 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_parser.y" // lalr1.cc:859
     { yylhs.value.as< SetMinMaxDelay > () = yystack_[2].value.as< SetMinMaxDelay > (); sdc_set_min_max_delay_add_to_from_group(callback, lexer, yylhs.value.as< SetMinMaxDelay > (), 
-                                                                    make_sdc_string_group(sdcparse::StringGroupType::STRING, yystack_[0].value.as< std::string > ()),
+                                                                    make_sdc_string_group(vhdcparse::StringGroupType::STRING, yystack_[0].value.as< std::string > ()),
                                                                     FromToType::TO);
                                                             }
 #line 1055 "/home/ale/git/VHawk/third_party/sdcparse/gen/sdc_parser.gen.cpp" // lalr1.cc:859
@@ -1094,7 +1094,7 @@ namespace sdcparse {
 #line 267 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_parser.y" // lalr1.cc:859
     { yylhs.value.as< SetMinMaxDelay > () = yystack_[2].value.as< SetMinMaxDelay > ();
                                                               sdc_set_min_max_delay_add_to_from_group(callback, lexer, yylhs.value.as< SetMinMaxDelay > (), 
-                                                                    make_sdc_string_group(sdcparse::StringGroupType::STRING, yystack_[0].value.as< std::string > ()), 
+                                                                    make_sdc_string_group(vhdcparse::StringGroupType::STRING, yystack_[0].value.as< std::string > ()), 
                                                                     FromToType::FROM);
                                                             }
 #line 1101 "/home/ale/git/VHawk/third_party/sdcparse/gen/sdc_parser.gen.cpp" // lalr1.cc:859
@@ -1104,7 +1104,7 @@ namespace sdcparse {
 #line 272 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_parser.y" // lalr1.cc:859
     { yylhs.value.as< SetMinMaxDelay > () = yystack_[2].value.as< SetMinMaxDelay > (); 
                                                               sdc_set_min_max_delay_add_to_from_group(callback, lexer, yylhs.value.as< SetMinMaxDelay > (), 
-                                                                    make_sdc_string_group(sdcparse::StringGroupType::STRING, yystack_[0].value.as< std::string > ()),
+                                                                    make_sdc_string_group(vhdcparse::StringGroupType::STRING, yystack_[0].value.as< std::string > ()),
                                                                     FromToType::TO);
                                                             }
 #line 1111 "/home/ale/git/VHawk/third_party/sdcparse/gen/sdc_parser.gen.cpp" // lalr1.cc:859
@@ -1173,7 +1173,7 @@ namespace sdcparse {
   case 73:
 #line 289 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_parser.y" // lalr1.cc:859
     { yylhs.value.as< SetMulticyclePath > () = yystack_[2].value.as< SetMulticyclePath > (); sdc_set_multicycle_path_add_to_from_group(callback, lexer, yylhs.value.as< SetMulticyclePath > (), 
-                                                                          make_sdc_string_group(sdcparse::StringGroupType::STRING, yystack_[0].value.as< std::string > ()), 
+                                                                          make_sdc_string_group(vhdcparse::StringGroupType::STRING, yystack_[0].value.as< std::string > ()), 
                                                                           FromToType::FROM);
                                                                   }
 #line 1180 "/home/ale/git/VHawk/third_party/sdcparse/gen/sdc_parser.gen.cpp" // lalr1.cc:859
@@ -1182,7 +1182,7 @@ namespace sdcparse {
   case 74:
 #line 293 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_parser.y" // lalr1.cc:859
     { yylhs.value.as< SetMulticyclePath > () = yystack_[2].value.as< SetMulticyclePath > (); sdc_set_multicycle_path_add_to_from_group(callback, lexer, yylhs.value.as< SetMulticyclePath > (), 
-                                                                          make_sdc_string_group(sdcparse::StringGroupType::STRING, yystack_[0].value.as< std::string > ()),
+                                                                          make_sdc_string_group(vhdcparse::StringGroupType::STRING, yystack_[0].value.as< std::string > ()),
                                                                           FromToType::TO);
                                                                   }
 #line 1189 "/home/ale/git/VHawk/third_party/sdcparse/gen/sdc_parser.gen.cpp" // lalr1.cc:859
@@ -1240,7 +1240,7 @@ namespace sdcparse {
 #line 307 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_parser.y" // lalr1.cc:859
     { yylhs.value.as< SetClockUncertainty > () = yystack_[2].value.as< SetClockUncertainty > ();
                                                                       sdc_set_clock_uncertainty_add_to_from_group(callback, lexer, yylhs.value.as< SetClockUncertainty > (), 
-                                                                          make_sdc_string_group(sdcparse::StringGroupType::STRING, yystack_[0].value.as< std::string > ()),
+                                                                          make_sdc_string_group(vhdcparse::StringGroupType::STRING, yystack_[0].value.as< std::string > ()),
                                                                           FromToType::FROM);
                                                                     }
 #line 1247 "/home/ale/git/VHawk/third_party/sdcparse/gen/sdc_parser.gen.cpp" // lalr1.cc:859
@@ -1250,7 +1250,7 @@ namespace sdcparse {
 #line 312 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_parser.y" // lalr1.cc:859
     { yylhs.value.as< SetClockUncertainty > () = yystack_[2].value.as< SetClockUncertainty > ();
                                                                       sdc_set_clock_uncertainty_add_to_from_group(callback, lexer, yylhs.value.as< SetClockUncertainty > (), 
-                                                                          make_sdc_string_group(sdcparse::StringGroupType::STRING, yystack_[0].value.as< std::string > ()),
+                                                                          make_sdc_string_group(vhdcparse::StringGroupType::STRING, yystack_[0].value.as< std::string > ()),
                                                                           FromToType::TO);
                                                                     }
 #line 1257 "/home/ale/git/VHawk/third_party/sdcparse/gen/sdc_parser.gen.cpp" // lalr1.cc:859
@@ -1326,7 +1326,7 @@ namespace sdcparse {
 #line 333 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_parser.y" // lalr1.cc:859
     { yylhs.value.as< SetDisableTiming > () = yystack_[2].value.as< SetDisableTiming > (); 
                                                                    sdc_set_disable_timing_add_to_from_group(callback, lexer, yylhs.value.as< SetDisableTiming > (), 
-                                                                     make_sdc_string_group(sdcparse::StringGroupType::STRING, yystack_[0].value.as< std::string > ()), 
+                                                                     make_sdc_string_group(vhdcparse::StringGroupType::STRING, yystack_[0].value.as< std::string > ()), 
                                                                      FromToType::FROM); 
                                                                  }
 #line 1333 "/home/ale/git/VHawk/third_party/sdcparse/gen/sdc_parser.gen.cpp" // lalr1.cc:859
@@ -1336,7 +1336,7 @@ namespace sdcparse {
 #line 338 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_parser.y" // lalr1.cc:859
     { yylhs.value.as< SetDisableTiming > () = yystack_[2].value.as< SetDisableTiming > (); 
                                                                    sdc_set_disable_timing_add_to_from_group(callback, lexer, yylhs.value.as< SetDisableTiming > (), 
-                                                                     make_sdc_string_group(sdcparse::StringGroupType::STRING, yystack_[0].value.as< std::string > ()), 
+                                                                     make_sdc_string_group(vhdcparse::StringGroupType::STRING, yystack_[0].value.as< std::string > ()), 
                                                                      FromToType::TO  ); 
                                                                  }
 #line 1343 "/home/ale/git/VHawk/third_party/sdcparse/gen/sdc_parser.gen.cpp" // lalr1.cc:859
@@ -2085,6 +2085,6 @@ namespace sdcparse {
 
 
 
-void sdcparse::VHdc_Parser::error(const std::string& msg) {
+void vhdcparse::VHdc_Parser::error(const std::string& msg) {
     sdc_error_wrap(callback, lexer.lineno(), lexer.text(), msg.c_str());
 }

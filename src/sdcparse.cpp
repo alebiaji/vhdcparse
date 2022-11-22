@@ -6,7 +6,7 @@
 #include "../include/sdc_lexer.hpp"
 #include "../include/sdc_error.hpp"
 
-namespace sdcparse {
+namespace vhdcparse {
 
 void sdc_parse_filename(std::string filename, Callback& callback) {
     sdc_parse_filename(filename.c_str(), callback);

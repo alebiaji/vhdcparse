@@ -73,7 +73,7 @@
 #include <limits>
 #include <functional>
 
-namespace sdcparse {
+namespace vhdcparse {
 /*
  * Forward declarations
  */

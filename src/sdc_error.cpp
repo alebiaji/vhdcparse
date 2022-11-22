@@ -3,7 +3,7 @@
 #include "../include/sdc_error.hpp"
 #include "../include/sdcparse.hpp"
 
-namespace sdcparse {
+namespace vhdcparse {
 
 //We wrap the actual sdc_error to issolate custom handlers from vaargs
 void sdc_error_wrap(Callback& callback, const int line_no, const std::string& near_text, const char* fmt, ...) {

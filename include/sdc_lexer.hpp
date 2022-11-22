@@ -3,7 +3,7 @@
 
 #include "sdc_parser.hpp" //For VHdc_Parser::symbol_type
 
-namespace sdcparse {
+namespace vhdcparse {
 
 typedef void* yyscan_t;
 
@@ -26,7 +26,7 @@ class VHdc_Lexer {
  * We re-define it to something reasonable
  */
 #undef YY_DECL
-#define YY_DECL sdcparse::VHdc_Parser::symbol_type sdcparse_lex(yyscan_t yyscanner, sdcparse::Callback& callback)
+#define YY_DECL vhdcparse::VHdc_Parser::symbol_type sdcparse_lex(yyscan_t yyscanner, vhdcparse::Callback& callback)
 
 } //namespace
 #endif

@@ -9,7 +9,7 @@
 #include "../include/sdc_common.hpp"
 #include "../include/sdc_error.hpp"
 
-namespace sdcparse {
+namespace vhdcparse {
 
 /*
  * Functions for create_clock

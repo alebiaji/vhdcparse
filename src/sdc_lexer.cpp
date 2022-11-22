@@ -8,7 +8,7 @@
 
 extern YY_DECL; //For sdcparse_lex()
 
-namespace sdcparse {
+namespace vhdcparse {
 
 VHdc_Lexer::VHdc_Lexer(FILE* file, Callback& callback)
     : callback_(callback) {

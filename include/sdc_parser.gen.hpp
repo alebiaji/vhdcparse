@@ -32,7 +32,7 @@
 
 /**
  ** \file /home/ale/git/VHawk/third_party/sdcparse/gen/sdc_parser.gen.hpp
- ** Define the sdcparse::parser class.
+ ** Define the vhdcparse::parser class.
  */
 
 // C++ LALR(1) parser skeleton written by Akim Demaille.
@@ -130,7 +130,7 @@
 #endif  /* ! defined SDCPARSE_DEBUG */
 
 #line 34 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_parser.y" // lalr1.cc:377
-namespace sdcparse {
+namespace vhdcparse {
 #line 135 "/home/ale/git/VHawk/third_party/sdcparse/gen/sdc_parser.gen.hpp" // lalr1.cc:377
 
 

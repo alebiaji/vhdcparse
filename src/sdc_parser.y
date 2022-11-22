@@ -76,7 +76,7 @@
     //Bison calls sdcparse_lex() to get the next token.
     //We use the VHdc_Lexer class as the interface to the lexer, so we
     //re-defined the function to tell Bison how to get the next token.
-    static sdcparse::VHdc_Parser::symbol_type sdcparse_lex(sdcparse::VHdc_Lexer& lexer) {
+    static vhdcparse::VHdc_Parser::symbol_type sdcparse_lex(vhdcparse::VHdc_Lexer& lexer) {
         return lexer.next_token();
     }
 }
@@ -90,7 +90,7 @@
 #include "../include/sdc_common.hpp"
 #include "../include/sdc_error.hpp"
 
-using namespace sdcparse;
+using namespace vhdcparse;
 
 %}
 
@@ -198,7 +198,7 @@ cmd_create_clock: CMD_CREATE_CLOCK                          { $$ = CreateClock()
     | cmd_create_clock LCPAR stringGroup RCPAR                  { $$ = $1; sdc_create_clock_add_targets(callback, lexer, $$, $3); 
                                                             }
     | cmd_create_clock string                               { $$ = $1; sdc_create_clock_add_targets(callback, lexer, $$, 
-                                                                        make_sdc_string_group(sdcparse::StringGroupType::STRING, $2)); 
+                                                                        make_sdc_string_group(vhdcparse::StringGroupType::STRING, $2)); 
                                                             }
     ;
 
@@ -223,7 +223,7 @@ cmd_set_clock_groups: CMD_SET_CLOCK_GROUPS                  { $$ = SetClockGroup
     | cmd_set_clock_groups ARG_GROUP LSPAR cmd_get_clocks RSPAR { $$ = $1; sdc_set_clock_groups_add_group(callback, lexer, $$, $4); }
     | cmd_set_clock_groups ARG_GROUP LCPAR stringGroup RCPAR    { $$ = $1; sdc_set_clock_groups_add_group(callback, lexer, $$, $4); }
     | cmd_set_clock_groups ARG_GROUP     string             { $$ = $1; sdc_set_clock_groups_add_group(callback, lexer, $$, 
-                                                                    make_sdc_string_group(sdcparse::StringGroupType::STRING, $3)); 
+                                                                    make_sdc_string_group(vhdcparse::StringGroupType::STRING, $3)); 
                                                             }
     ;
 
@@ -233,11 +233,11 @@ cmd_set_false_path: CMD_SET_FALSE_PATH                      { $$ = SetFalsePath(
     | cmd_set_false_path ARG_FROM LCPAR stringGroup RCPAR       { $$ = $1; sdc_set_false_path_add_to_from_group(callback, lexer, $$, $4, FromToType::FROM); }
     | cmd_set_false_path ARG_TO   LCPAR stringGroup RCPAR       { $$ = $1; sdc_set_false_path_add_to_from_group(callback, lexer, $$, $4, FromToType::TO  ); }
     | cmd_set_false_path ARG_FROM     string                { $$ = $1; sdc_set_false_path_add_to_from_group(callback, lexer, $$, 
-                                                                    make_sdc_string_group(sdcparse::StringGroupType::STRING, $3), 
+                                                                    make_sdc_string_group(vhdcparse::StringGroupType::STRING, $3), 
                                                                     FromToType::FROM); 
                                                             }
     | cmd_set_false_path ARG_TO       string                { $$ = $1; sdc_set_false_path_add_to_from_group(callback, lexer, $$, 
-                                                                    make_sdc_string_group(sdcparse::StringGroupType::STRING, $3), 
+                                                                    make_sdc_string_group(vhdcparse::StringGroupType::STRING, $3), 
                                                                     FromToType::TO  ); 
                                                             }
     ;
@@ -249,11 +249,11 @@ cmd_set_max_delay: CMD_SET_MAX_DELAY                        { $$ = SetMinMaxDela
     | cmd_set_max_delay ARG_FROM LCPAR stringGroup RCPAR    { $$ = $1; sdc_set_min_max_delay_add_to_from_group(callback, lexer, $$, $4, FromToType::FROM); }
     | cmd_set_max_delay ARG_TO   LCPAR stringGroup RCPAR    { $$ = $1; sdc_set_min_max_delay_add_to_from_group(callback, lexer, $$, $4, FromToType::TO  ); }
     | cmd_set_max_delay ARG_FROM     string                 { $$ = $1; sdc_set_min_max_delay_add_to_from_group(callback, lexer, $$, 
-                                                                    make_sdc_string_group(sdcparse::StringGroupType::STRING, $3), 
+                                                                    make_sdc_string_group(vhdcparse::StringGroupType::STRING, $3), 
                                                                     FromToType::FROM);
                                                             }
     | cmd_set_max_delay ARG_TO       string                 { $$ = $1; sdc_set_min_max_delay_add_to_from_group(callback, lexer, $$, 
-                                                                    make_sdc_string_group(sdcparse::StringGroupType::STRING, $3),
+                                                                    make_sdc_string_group(vhdcparse::StringGroupType::STRING, $3),
                                                                     FromToType::TO);
                                                             }
     ;
@@ -266,12 +266,12 @@ cmd_set_min_delay: CMD_SET_MIN_DELAY                        { $$ = SetMinMaxDela
     | cmd_set_min_delay ARG_TO   LCPAR stringGroup RCPAR    { $$ = $1; sdc_set_min_max_delay_add_to_from_group(callback, lexer, $$, $4, FromToType::TO  ); }
     | cmd_set_min_delay ARG_FROM     string                 { $$ = $1;
                                                               sdc_set_min_max_delay_add_to_from_group(callback, lexer, $$, 
-                                                                    make_sdc_string_group(sdcparse::StringGroupType::STRING, $3), 
+                                                                    make_sdc_string_group(vhdcparse::StringGroupType::STRING, $3), 
                                                                     FromToType::FROM);
                                                             }
     | cmd_set_min_delay ARG_TO       string                 { $$ = $1; 
                                                               sdc_set_min_max_delay_add_to_from_group(callback, lexer, $$, 
-                                                                    make_sdc_string_group(sdcparse::StringGroupType::STRING, $3),
+                                                                    make_sdc_string_group(vhdcparse::StringGroupType::STRING, $3),
                                                                     FromToType::TO);
                                                             }
     ;
@@ -287,11 +287,11 @@ cmd_set_multicycle_path: CMD_SET_MULTICYCLE_PATH                  { $$ = SetMult
     | cmd_set_multicycle_path ARG_FROM LSPAR cmd_get_pins RSPAR   { $$ = $1; sdc_set_multicycle_path_add_to_from_group(callback, lexer, $$, $4, FromToType::FROM); }
     | cmd_set_multicycle_path ARG_TO   LSPAR cmd_get_pins RSPAR   { $$ = $1; sdc_set_multicycle_path_add_to_from_group(callback, lexer, $$, $4, FromToType::TO); }
     | cmd_set_multicycle_path ARG_FROM     string                 { $$ = $1; sdc_set_multicycle_path_add_to_from_group(callback, lexer, $$, 
-                                                                          make_sdc_string_group(sdcparse::StringGroupType::STRING, $3), 
+                                                                          make_sdc_string_group(vhdcparse::StringGroupType::STRING, $3), 
                                                                           FromToType::FROM);
                                                                   }
     | cmd_set_multicycle_path ARG_TO       string                 { $$ = $1; sdc_set_multicycle_path_add_to_from_group(callback, lexer, $$, 
-                                                                          make_sdc_string_group(sdcparse::StringGroupType::STRING, $3),
+                                                                          make_sdc_string_group(vhdcparse::StringGroupType::STRING, $3),
                                                                           FromToType::TO);
                                                                   }
     ;
@@ -306,12 +306,12 @@ cmd_set_clock_uncertainty: CMD_SET_CLOCK_UNCERTAINTY                { $$ = SetCl
     | cmd_set_clock_uncertainty ARG_TO   LCPAR stringGroup RCPAR    { $$ = $1; sdc_set_clock_uncertainty_add_to_from_group(callback, lexer, $$, $4, FromToType::TO); }
     | cmd_set_clock_uncertainty ARG_FROM     string                 { $$ = $1;
                                                                       sdc_set_clock_uncertainty_add_to_from_group(callback, lexer, $$, 
-                                                                          make_sdc_string_group(sdcparse::StringGroupType::STRING, $3),
+                                                                          make_sdc_string_group(vhdcparse::StringGroupType::STRING, $3),
                                                                           FromToType::FROM);
                                                                     }
     | cmd_set_clock_uncertainty ARG_TO       string                 { $$ = $1;
                                                                       sdc_set_clock_uncertainty_add_to_from_group(callback, lexer, $$, 
-                                                                          make_sdc_string_group(sdcparse::StringGroupType::STRING, $3),
+                                                                          make_sdc_string_group(vhdcparse::StringGroupType::STRING, $3),
                                                                           FromToType::TO);
                                                                     }
     ;
@@ -332,12 +332,12 @@ cmd_set_disable_timing: CMD_SET_DISABLE_TIMING                       { $$ = SetD
     | cmd_set_disable_timing ARG_TO   LCPAR stringGroup RCPAR    { $$ = $1; sdc_set_disable_timing_add_to_from_group(callback, lexer, $$, $4, FromToType::TO  ); }
     | cmd_set_disable_timing ARG_FROM     string                 { $$ = $1; 
                                                                    sdc_set_disable_timing_add_to_from_group(callback, lexer, $$, 
-                                                                     make_sdc_string_group(sdcparse::StringGroupType::STRING, $3), 
+                                                                     make_sdc_string_group(vhdcparse::StringGroupType::STRING, $3), 
                                                                      FromToType::FROM); 
                                                                  }
     | cmd_set_disable_timing ARG_TO       string                 { $$ = $1; 
                                                                    sdc_set_disable_timing_add_to_from_group(callback, lexer, $$, 
-                                                                     make_sdc_string_group(sdcparse::StringGroupType::STRING, $3), 
+                                                                     make_sdc_string_group(vhdcparse::StringGroupType::STRING, $3), 
                                                                      FromToType::TO  ); 
                                                                  }
     ;
@@ -396,6 +396,6 @@ int_number: INT_NUMBER { $$ = $1; }
 %%
 
 
-void sdcparse::VHdc_Parser::error(const std::string& msg) {
+void vhdcparse::VHdc_Parser::error(const std::string& msg) {
     sdc_error_wrap(callback, lexer.lineno(), lexer.text(), msg.c_str());
 }

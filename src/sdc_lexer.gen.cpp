@@ -1309,7 +1309,7 @@ case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
 #line 73 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_EOL(); }
+{ return vhdcparse::VHdc_Parser::make_EOL(); }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
@@ -1319,189 +1319,189 @@ YY_RULE_SETUP
 case 5:
 YY_RULE_SETUP
 #line 76 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_CMD_CREATE_CLOCK(); }
+{ return vhdcparse::VHdc_Parser::make_CMD_CREATE_CLOCK(); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
 #line 77 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_CMD_SET_INPUT_DELAY(); }
+{ return vhdcparse::VHdc_Parser::make_CMD_SET_INPUT_DELAY(); }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 78 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_CMD_SET_OUTPUT_DELAY(); }
+{ return vhdcparse::VHdc_Parser::make_CMD_SET_OUTPUT_DELAY(); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 79 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_CMD_SET_CLOCK_GROUPS(); }
+{ return vhdcparse::VHdc_Parser::make_CMD_SET_CLOCK_GROUPS(); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 80 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_CMD_SET_FALSE_PATH(); }
+{ return vhdcparse::VHdc_Parser::make_CMD_SET_FALSE_PATH(); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 81 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_CMD_SET_MAX_DELAY(); }
+{ return vhdcparse::VHdc_Parser::make_CMD_SET_MAX_DELAY(); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 82 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_CMD_SET_MIN_DELAY(); }
+{ return vhdcparse::VHdc_Parser::make_CMD_SET_MIN_DELAY(); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 83 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_CMD_SET_MULTICYCLE_PATH(); }
+{ return vhdcparse::VHdc_Parser::make_CMD_SET_MULTICYCLE_PATH(); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
 #line 84 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_CMD_SET_CLOCK_UNCERTAINTY(); }
+{ return vhdcparse::VHdc_Parser::make_CMD_SET_CLOCK_UNCERTAINTY(); }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 85 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_CMD_SET_CLOCK_LATENCY(); }
+{ return vhdcparse::VHdc_Parser::make_CMD_SET_CLOCK_LATENCY(); }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
 #line 86 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_CMD_SET_DISABLE_TIMING(); }
+{ return vhdcparse::VHdc_Parser::make_CMD_SET_DISABLE_TIMING(); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
 #line 87 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_CMD_SET_TIMING_DERATE(); }
+{ return vhdcparse::VHdc_Parser::make_CMD_SET_TIMING_DERATE(); }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
 #line 89 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_CMD_CURRENT_DESIGN(); }
+{ return vhdcparse::VHdc_Parser::make_CMD_CURRENT_DESIGN(); }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
 #line 91 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_CMD_GET_PORTS(); }
+{ return vhdcparse::VHdc_Parser::make_CMD_GET_PORTS(); }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
 #line 92 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_CMD_GET_CLOCKS(); }
+{ return vhdcparse::VHdc_Parser::make_CMD_GET_CLOCKS(); }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
 #line 93 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_CMD_GET_CELLS(); }
+{ return vhdcparse::VHdc_Parser::make_CMD_GET_CELLS(); }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
 #line 94 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_CMD_GET_PINS(); }
+{ return vhdcparse::VHdc_Parser::make_CMD_GET_PINS(); }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
 #line 96 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_ARG_PERIOD(); }
+{ return vhdcparse::VHdc_Parser::make_ARG_PERIOD(); }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
 #line 97 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_ARG_NAME(); }
+{ return vhdcparse::VHdc_Parser::make_ARG_NAME(); }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
 #line 98 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_ARG_WAVEFORM(); }
+{ return vhdcparse::VHdc_Parser::make_ARG_WAVEFORM(); }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
 #line 99 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_ARG_CLOCK(); }
+{ return vhdcparse::VHdc_Parser::make_ARG_CLOCK(); }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
 #line 100 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_ARG_MAX(); }
+{ return vhdcparse::VHdc_Parser::make_ARG_MAX(); }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
 #line 101 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_ARG_MIN(); }
+{ return vhdcparse::VHdc_Parser::make_ARG_MIN(); }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
 #line 102 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_ARG_EXCLUSIVE(); }
+{ return vhdcparse::VHdc_Parser::make_ARG_EXCLUSIVE(); }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
 #line 103 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_ARG_GROUP(); }
+{ return vhdcparse::VHdc_Parser::make_ARG_GROUP(); }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
 #line 104 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_ARG_FROM(); }
+{ return vhdcparse::VHdc_Parser::make_ARG_FROM(); }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
 #line 105 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_ARG_TO(); }
+{ return vhdcparse::VHdc_Parser::make_ARG_TO(); }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
 #line 106 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_ARG_SETUP(); }
+{ return vhdcparse::VHdc_Parser::make_ARG_SETUP(); }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
 #line 107 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_ARG_HOLD(); }
+{ return vhdcparse::VHdc_Parser::make_ARG_HOLD(); }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
 #line 108 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_ARG_EARLY(); }
+{ return vhdcparse::VHdc_Parser::make_ARG_EARLY(); }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
 #line 109 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_ARG_LATE(); }
+{ return vhdcparse::VHdc_Parser::make_ARG_LATE(); }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
 #line 110 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_ARG_CELL_DELAY(); }
+{ return vhdcparse::VHdc_Parser::make_ARG_CELL_DELAY(); }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
 #line 111 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_ARG_NET_DELAY(); }
+{ return vhdcparse::VHdc_Parser::make_ARG_NET_DELAY(); }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
 #line 112 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_ARG_SOURCE(); }
+{ return vhdcparse::VHdc_Parser::make_ARG_SOURCE(); }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
 #line 114 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_INT_NUMBER(atoi(sdcparse_get_text(yyscanner))); }
+{ return vhdcparse::VHdc_Parser::make_INT_NUMBER(atoi(sdcparse_get_text(yyscanner))); }
 	YY_BREAK
 case 40:
 /* rule 40 can match eol */
 YY_RULE_SETUP
 #line 115 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_FLOAT_NUMBER(atof(sdcparse_get_text(yyscanner))); }
+{ return vhdcparse::VHdc_Parser::make_FLOAT_NUMBER(atof(sdcparse_get_text(yyscanner))); }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
 #line 116 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
 { 
-                                  return sdcparse::VHdc_Parser::make_STRING(sdcparse_get_text(yyscanner)); 
+                                  return vhdcparse::VHdc_Parser::make_STRING(sdcparse_get_text(yyscanner)); 
                                 }
 	YY_BREAK
 case 42:
@@ -1518,7 +1518,7 @@ YY_RULE_SETUP
                                    * white-space.
                                    */
                                   size_t len = strlen(sdcparse_get_text(yyscanner));
-                                  char* tmp_str = sdcparse::strndup(sdcparse_get_text(yyscanner)+1, len-2); //Duplicate and trim braces
+                                  char* tmp_str = vhdcparse::strndup(sdcparse_get_text(yyscanner)+1, len-2); //Duplicate and trim braces
 
                                   char* modified_str = tmp_str; //Save the original tmp_str for freeing
 
@@ -1538,7 +1538,7 @@ YY_RULE_SETUP
                                   //to terminate the string here.
                                   *tmp_ptr = '\0';
 
-                                  auto ret = sdcparse::VHdc_Parser::make_ESCAPED_STRING(modified_str);
+                                  auto ret = vhdcparse::VHdc_Parser::make_ESCAPED_STRING(modified_str);
 
                                   //Clean-up the temporary string
                                   free(tmp_str);
@@ -1549,22 +1549,22 @@ YY_RULE_SETUP
 case 43:
 YY_RULE_SETUP
 #line 156 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_LSPAR(); }
+{ return vhdcparse::VHdc_Parser::make_LSPAR(); }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
 #line 157 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_RSPAR(); }
+{ return vhdcparse::VHdc_Parser::make_RSPAR(); }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
 #line 158 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_LCPAR(); }
+{ return vhdcparse::VHdc_Parser::make_LCPAR(); }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
 #line 159 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
-{ return sdcparse::VHdc_Parser::make_RCPAR(); }
+{ return vhdcparse::VHdc_Parser::make_RCPAR(); }
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
 #line 160 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_lexer.l"
@@ -1575,7 +1575,7 @@ case YY_STATE_EOF(INITIAL):
                                      there will always be an EOL provided to the parser. 
                                      However it may also generate a stray EOL if the last
                                      line IS blank - so the parse must handle those correctly. */
-                                  static bool once; return (once = !once) ? sdcparse::VHdc_Parser::make_EOL() : sdcparse::VHdc_Parser::make_EOF();
+                                  static bool once; return (once = !once) ? vhdcparse::VHdc_Parser::make_EOL() : vhdcparse::VHdc_Parser::make_EOF();
                                 }
 	YY_BREAK
 case 47:

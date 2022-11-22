@@ -32,7 +32,7 @@
 
 /**
  ** \file /home/ale/git/VHawk/third_party/sdcparse/gen/stack.hh
- ** Define the sdcparse::stack class.
+ ** Define the vhdcparse::stack class.
  */
 
 #ifndef YY_SDCPARSE_HOME_ALE_GIT_VHAWK_THIRD_PARTY_SDCPARSE_GEN_STACK_HH_INCLUDED
@@ -41,7 +41,7 @@
 # include <vector>
 
 #line 34 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_parser.y" // stack.hh:132
-namespace sdcparse {
+namespace vhdcparse {
 #line 46 "/home/ale/git/VHawk/third_party/sdcparse/gen/stack.hh" // stack.hh:132
   template <class T, class S = std::vector<T> >
   class stack
