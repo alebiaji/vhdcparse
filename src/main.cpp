@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#include "sdcparse.hpp"
+#include "../include/sdcparse.hpp"
 
 using namespace sdcparse;
 

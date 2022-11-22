@@ -2,11 +2,11 @@
     /*
      * Include Files
      */
-    #include "sdcparse.hpp"
-    #include "sdc_common.hpp"
-    #include "sdc_error.hpp"
+    #include "../include/sdcparse.hpp"
+    #include "../include/sdc_common.hpp"
+    #include "../include/sdc_error.hpp"
 
-    #include "sdc_lexer.hpp"
+    #include "../include/sdc_lexer.hpp"
 
 %}
 
@@ -56,7 +56,7 @@ FLOAT_EXP ([eE][-+]?{DIGIT10}+)
 FLOAT_NUMBER ({NAN}|([-+]?({INF}|({FLOAT_BASE}{FLOAT_EXP}?))))
 INT_NUMBER ([-+]?{DIGIT10}+)
 ALPHA [a-zA-Z_]
-SYMBOL [-~|:*\\/^\.\$]
+SYMBOL [-~|:*\\/^\.\$\"]
 ID_FIRST ({ALPHA}|{SYMBOL})
 ID_MID ({ALPHA}|{DIGIT10}|{SYMBOL})
 ID_INDEX (\[{DIGIT10}+\])
@@ -70,49 +70,51 @@ ESCAPED_STR (\{{WS}*[^ \t]*{WS}*\})
 %%
 #.*                             { /* skip comments */ }
 {BACK_SLASH}{WS}*{ENDL}         { /* line continuation don't send EOL to parser */ }
-{ENDL}                          { return sdcparse::Parser::make_EOL(); }
+{ENDL}                          { return sdcparse::VHdc_Parser::make_EOL(); }
 {WS}+                           { /* skip white space */ }
 
-"create_clock"                  { return sdcparse::Parser::make_CMD_CREATE_CLOCK(); }
-"set_input_delay"               { return sdcparse::Parser::make_CMD_SET_INPUT_DELAY(); }
-"set_output_delay"              { return sdcparse::Parser::make_CMD_SET_OUTPUT_DELAY(); }
-"set_clock_groups"              { return sdcparse::Parser::make_CMD_SET_CLOCK_GROUPS(); }
-"set_false_path"                { return sdcparse::Parser::make_CMD_SET_FALSE_PATH(); }
-"set_max_delay"                 { return sdcparse::Parser::make_CMD_SET_MAX_DELAY(); }
-"set_min_delay"                 { return sdcparse::Parser::make_CMD_SET_MIN_DELAY(); }
-"set_multicycle_path"           { return sdcparse::Parser::make_CMD_SET_MULTICYCLE_PATH(); }
-"set_clock_uncertainty"         { return sdcparse::Parser::make_CMD_SET_CLOCK_UNCERTAINTY(); }
-"set_clock_latency"             { return sdcparse::Parser::make_CMD_SET_CLOCK_LATENCY(); }
-"set_disable_timing"            { return sdcparse::Parser::make_CMD_SET_DISABLE_TIMING(); }
-"set_timing_derate"             { return sdcparse::Parser::make_CMD_SET_TIMING_DERATE(); }
+"create_clock"                  { return sdcparse::VHdc_Parser::make_CMD_CREATE_CLOCK(); }
+"set_input_delay"               { return sdcparse::VHdc_Parser::make_CMD_SET_INPUT_DELAY(); }
+"set_output_delay"              { return sdcparse::VHdc_Parser::make_CMD_SET_OUTPUT_DELAY(); }
+"set_clock_groups"              { return sdcparse::VHdc_Parser::make_CMD_SET_CLOCK_GROUPS(); }
+"set_false_path"                { return sdcparse::VHdc_Parser::make_CMD_SET_FALSE_PATH(); }
+"set_max_delay"                 { return sdcparse::VHdc_Parser::make_CMD_SET_MAX_DELAY(); }
+"set_min_delay"                 { return sdcparse::VHdc_Parser::make_CMD_SET_MIN_DELAY(); }
+"set_multicycle_path"           { return sdcparse::VHdc_Parser::make_CMD_SET_MULTICYCLE_PATH(); }
+"set_clock_uncertainty"         { return sdcparse::VHdc_Parser::make_CMD_SET_CLOCK_UNCERTAINTY(); }
+"set_clock_latency"             { return sdcparse::VHdc_Parser::make_CMD_SET_CLOCK_LATENCY(); }
+"set_disable_timing"            { return sdcparse::VHdc_Parser::make_CMD_SET_DISABLE_TIMING(); }
+"set_timing_derate"             { return sdcparse::VHdc_Parser::make_CMD_SET_TIMING_DERATE(); }
 
-"get_ports"                     { return sdcparse::Parser::make_CMD_GET_PORTS(); }
-"get_clocks"                    { return sdcparse::Parser::make_CMD_GET_CLOCKS(); }
-"get_cells"                     { return sdcparse::Parser::make_CMD_GET_CELLS(); }
-"get_pins"                      { return sdcparse::Parser::make_CMD_GET_PINS(); }
+"current_design"                { return sdcparse::VHdc_Parser::make_CMD_CURRENT_DESIGN(); }
 
-"-period"                       { return sdcparse::Parser::make_ARG_PERIOD(); }
-"-name"                         { return sdcparse::Parser::make_ARG_NAME(); }
-"-waveform"                     { return sdcparse::Parser::make_ARG_WAVEFORM(); }
-"-clock"                        { return sdcparse::Parser::make_ARG_CLOCK(); }
-"-max"                          { return sdcparse::Parser::make_ARG_MAX(); }
-"-min"                          { return sdcparse::Parser::make_ARG_MIN(); }
-"-exclusive"                    { return sdcparse::Parser::make_ARG_EXCLUSIVE(); }
-"-group"                        { return sdcparse::Parser::make_ARG_GROUP(); }
-"-from"                         { return sdcparse::Parser::make_ARG_FROM(); }
-"-to"                           { return sdcparse::Parser::make_ARG_TO(); }
-"-setup"                        { return sdcparse::Parser::make_ARG_SETUP(); }
-"-hold"                         { return sdcparse::Parser::make_ARG_HOLD(); }
-"-early"                        { return sdcparse::Parser::make_ARG_EARLY(); }
-"-late"                         { return sdcparse::Parser::make_ARG_LATE(); }
-"-cell_delay"                   { return sdcparse::Parser::make_ARG_CELL_DELAY(); }
-"-net_delay"                    { return sdcparse::Parser::make_ARG_NET_DELAY(); }
-"-source"                       { return sdcparse::Parser::make_ARG_SOURCE(); }
+"get_ports"                     { return sdcparse::VHdc_Parser::make_CMD_GET_PORTS(); }
+"get_clocks"                    { return sdcparse::VHdc_Parser::make_CMD_GET_CLOCKS(); }
+"get_cells"                     { return sdcparse::VHdc_Parser::make_CMD_GET_CELLS(); }
+"get_pins"                      { return sdcparse::VHdc_Parser::make_CMD_GET_PINS(); }
 
-{INT_NUMBER}                    { return sdcparse::Parser::make_INT_NUMBER(atoi(sdcparse_get_text(yyscanner))); }
-{FLOAT_NUMBER}                  { return sdcparse::Parser::make_FLOAT_NUMBER(atof(sdcparse_get_text(yyscanner))); }
+"-period"                       { return sdcparse::VHdc_Parser::make_ARG_PERIOD(); }
+"-name"                         { return sdcparse::VHdc_Parser::make_ARG_NAME(); }
+"-waveform"                     { return sdcparse::VHdc_Parser::make_ARG_WAVEFORM(); }
+"-clock"                        { return sdcparse::VHdc_Parser::make_ARG_CLOCK(); }
+"-max"                          { return sdcparse::VHdc_Parser::make_ARG_MAX(); }
+"-min"                          { return sdcparse::VHdc_Parser::make_ARG_MIN(); }
+"-exclusive"                    { return sdcparse::VHdc_Parser::make_ARG_EXCLUSIVE(); }
+"-group"                        { return sdcparse::VHdc_Parser::make_ARG_GROUP(); }
+"-from"                         { return sdcparse::VHdc_Parser::make_ARG_FROM(); }
+"-to"                           { return sdcparse::VHdc_Parser::make_ARG_TO(); }
+"-setup"                        { return sdcparse::VHdc_Parser::make_ARG_SETUP(); }
+"-hold"                         { return sdcparse::VHdc_Parser::make_ARG_HOLD(); }
+"-early"                        { return sdcparse::VHdc_Parser::make_ARG_EARLY(); }
+"-late"                         { return sdcparse::VHdc_Parser::make_ARG_LATE(); }
+"-cell_delay"                   { return sdcparse::VHdc_Parser::make_ARG_CELL_DELAY(); }
+"-net_delay"                    { return sdcparse::VHdc_Parser::make_ARG_NET_DELAY(); }
+"-source"                       { return sdcparse::VHdc_Parser::make_ARG_SOURCE(); }
+
+{INT_NUMBER}                    { return sdcparse::VHdc_Parser::make_INT_NUMBER(atoi(sdcparse_get_text(yyscanner))); }
+{FLOAT_NUMBER}                  { return sdcparse::VHdc_Parser::make_FLOAT_NUMBER(atof(sdcparse_get_text(yyscanner))); }
 {STR}                           { 
-                                  return sdcparse::Parser::make_STRING(sdcparse_get_text(yyscanner)); 
+                                  return sdcparse::VHdc_Parser::make_STRING(sdcparse_get_text(yyscanner)); 
                                 }
 {ESCAPED_STR}                   {
                                   /*
@@ -144,17 +146,17 @@ ESCAPED_STR (\{{WS}*[^ \t]*{WS}*\})
                                   //to terminate the string here.
                                   *tmp_ptr = '\0';
 
-                                  auto ret = sdcparse::Parser::make_ESCAPED_STRING(modified_str);
+                                  auto ret = sdcparse::VHdc_Parser::make_ESCAPED_STRING(modified_str);
 
                                   //Clean-up the temporary string
                                   free(tmp_str);
 
                                   return ret; 
                                 }
-\[                              { return sdcparse::Parser::make_LSPAR(); }
-\]                              { return sdcparse::Parser::make_RSPAR(); }
-\{                              { return sdcparse::Parser::make_LCPAR(); }
-\}                              { return sdcparse::Parser::make_RCPAR(); }
+\[                              { return sdcparse::VHdc_Parser::make_LSPAR(); }
+\]                              { return sdcparse::VHdc_Parser::make_RSPAR(); }
+\{                              { return sdcparse::VHdc_Parser::make_LCPAR(); }
+\}                              { return sdcparse::VHdc_Parser::make_RCPAR(); }
 <<EOF>>                         { /* If the file has no blank line at the end there will
                                      not be the expected EOL following the last command. 
                                      So first time through, return EOL, and subsequently 
@@ -162,7 +164,7 @@ ESCAPED_STR (\{{WS}*[^ \t]*{WS}*\})
                                      there will always be an EOL provided to the parser. 
                                      However it may also generate a stray EOL if the last
                                      line IS blank - so the parse must handle those correctly. */
-                                  static bool once; return (once = !once) ? sdcparse::Parser::make_EOL() : sdcparse::Parser::make_EOF();
+                                  static bool once; return (once = !once) ? sdcparse::VHdc_Parser::make_EOL() : sdcparse::VHdc_Parser::make_EOF();
                                 }
 .                               { 
                                   sdc_error_wrap(callback, sdcparse_get_lineno(yyscanner), sdcparse_get_text(yyscanner), "Unrecognized character"); 

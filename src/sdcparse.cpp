@@ -1,10 +1,10 @@
 #include <stdio.h>
 
-#include "sdcparse.hpp"
-#include "sdc_common.hpp"
+#include "../include/sdcparse.hpp"
+#include "../include/sdc_common.hpp"
 
-#include "sdc_lexer.hpp"
-#include "sdc_error.hpp"
+#include "../include/sdc_lexer.hpp"
+#include "../include/sdc_error.hpp"
 
 namespace sdcparse {
 
@@ -27,10 +27,10 @@ void sdc_parse_filename(const char* filename, Callback& callback) {
 void sdc_parse_file(FILE* sdc_file, Callback& callback, const char* filename) {
 
     //Initialize the lexer
-    Lexer lexer(sdc_file, callback);
+    VHdc_Lexer lexer(sdc_file, callback);
 
     //Setup the parser + lexer
-    Parser parser(lexer, callback);
+    VHdc_Parser parser(lexer, callback);
 
     //Just before parsing starts
     callback.start_parse();

@@ -3,7 +3,7 @@
 
 //Forward declaration used by parser definition
 namespace sdcparse {
-    class Lexer;
+    class VHdc_Lexer;
 }
 
 #endif

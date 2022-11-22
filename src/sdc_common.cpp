@@ -6,15 +6,15 @@
 #include <cmath>
 #include <memory>
 
-#include "sdc_common.hpp"
-#include "sdc_error.hpp"
+#include "../include/sdc_common.hpp"
+#include "../include/sdc_error.hpp"
 
 namespace sdcparse {
 
 /*
  * Functions for create_clock
  */
-void sdc_create_clock_set_period(Callback& callback, const Lexer& lexer, CreateClock& sdc_create_clock, double period) {
+void sdc_create_clock_set_period(Callback& callback, const VHdc_Lexer& lexer, CreateClock& sdc_create_clock, double period) {
     if(!std::isnan(sdc_create_clock.period)) {
         sdc_error_wrap(callback, lexer.lineno(), lexer.text(), "Can only define a single clock period.\n"); 
     } else {
@@ -22,7 +22,7 @@ void sdc_create_clock_set_period(Callback& callback, const Lexer& lexer, CreateC
     }
 }
 
-void sdc_create_clock_set_name(Callback& callback, const Lexer& lexer, CreateClock& sdc_create_clock, const std::string& name) {
+void sdc_create_clock_set_name(Callback& callback, const VHdc_Lexer& lexer, CreateClock& sdc_create_clock, const std::string& name) {
     if(!sdc_create_clock.name.empty()) {
         sdc_error_wrap(callback, lexer.lineno(), lexer.text(), "Can only define a single clock name.\n");
     } else {
@@ -30,7 +30,7 @@ void sdc_create_clock_set_name(Callback& callback, const Lexer& lexer, CreateClo
     }
 }
 
-void sdc_create_clock_set_waveform(Callback& callback, const Lexer& lexer, CreateClock& sdc_create_clock, double rise_edge, double fall_edge) {
+void sdc_create_clock_set_waveform(Callback& callback, const VHdc_Lexer& lexer, CreateClock& sdc_create_clock, double rise_edge, double fall_edge) {
     if(!std::isnan(sdc_create_clock.rise_edge) || !std::isnan(sdc_create_clock.fall_edge)) {
         sdc_error_wrap(callback, lexer.lineno(), lexer.text(), "Can only define a single waveform.\n"); 
     } else {
@@ -39,7 +39,7 @@ void sdc_create_clock_set_waveform(Callback& callback, const Lexer& lexer, Creat
     }
 }
 
-void sdc_create_clock_add_targets(Callback& callback, const Lexer& lexer, CreateClock& sdc_create_clock, StringGroup target_group) {
+void sdc_create_clock_add_targets(Callback& callback, const VHdc_Lexer& lexer, CreateClock& sdc_create_clock, StringGroup target_group) {
     assert(target_group.type == StringGroupType::STRING);
 
     if(!sdc_create_clock.targets.strings.empty()) {
@@ -50,7 +50,7 @@ void sdc_create_clock_add_targets(Callback& callback, const Lexer& lexer, Create
     sdc_create_clock.targets = target_group;
 }
 
-void add_sdc_create_clock(Callback& callback, const Lexer& lexer, CreateClock& sdc_create_clock) {
+void add_sdc_create_clock(Callback& callback, const VHdc_Lexer& lexer, CreateClock& sdc_create_clock) {
     /*
      * Error Checking
      */
@@ -101,7 +101,7 @@ void add_sdc_create_clock(Callback& callback, const Lexer& lexer, CreateClock& s
 /*
  * Functions for set_input_delay/set_output_delay
  */
-void sdc_set_io_delay_set_clock(Callback& callback, const Lexer& lexer, SetIoDelay& sdc_set_io_delay, const std::string& clock_name) {
+void sdc_set_io_delay_set_clock(Callback& callback, const VHdc_Lexer& lexer, SetIoDelay& sdc_set_io_delay, const std::string& clock_name) {
     if(!sdc_set_io_delay.clock_name.empty()) {
         sdc_error_wrap(callback, lexer.lineno(), lexer.text(), "Can only specify a single clock\n"); 
     }
@@ -109,7 +109,7 @@ void sdc_set_io_delay_set_clock(Callback& callback, const Lexer& lexer, SetIoDel
     sdc_set_io_delay.clock_name = clock_name;
 }
 
-void sdc_set_io_delay_set_value(Callback& callback, const Lexer& lexer, SetIoDelay& sdc_set_io_delay, double value) {
+void sdc_set_io_delay_set_value(Callback& callback, const VHdc_Lexer& lexer, SetIoDelay& sdc_set_io_delay, double value) {
     if(!std::isnan(sdc_set_io_delay.delay)) {
         sdc_error_wrap(callback, lexer.lineno(), lexer.text(), "Delay value can only specified once.\n"); 
     }
@@ -117,7 +117,7 @@ void sdc_set_io_delay_set_value(Callback& callback, const Lexer& lexer, SetIoDel
     sdc_set_io_delay.delay = value;
 }
 
-void sdc_set_io_delay_set_max(Callback& callback, const Lexer& lexer, SetIoDelay& sdc_set_io_delay) {
+void sdc_set_io_delay_set_max(Callback& callback, const VHdc_Lexer& lexer, SetIoDelay& sdc_set_io_delay) {
     if (sdc_set_io_delay.is_max) {
         sdc_error_wrap(callback, lexer.lineno(), lexer.text(), "-max can only be specified once.\n"); 
     }
@@ -125,7 +125,7 @@ void sdc_set_io_delay_set_max(Callback& callback, const Lexer& lexer, SetIoDelay
     sdc_set_io_delay.is_max = true;
 }
 
-void sdc_set_io_delay_set_min(Callback& callback, const Lexer& lexer, SetIoDelay& sdc_set_io_delay) {
+void sdc_set_io_delay_set_min(Callback& callback, const VHdc_Lexer& lexer, SetIoDelay& sdc_set_io_delay) {
     if (sdc_set_io_delay.is_min) {
         sdc_error_wrap(callback, lexer.lineno(), lexer.text(), "-min can only be specified once.\n"); 
     }
@@ -133,7 +133,7 @@ void sdc_set_io_delay_set_min(Callback& callback, const Lexer& lexer, SetIoDelay
     sdc_set_io_delay.is_min = true;
 }
 
-void sdc_set_io_delay_set_ports(Callback& callback, const Lexer& lexer, SetIoDelay& sdc_set_io_delay, StringGroup ports) {
+void sdc_set_io_delay_set_ports(Callback& callback, const VHdc_Lexer& lexer, SetIoDelay& sdc_set_io_delay, StringGroup ports) {
     assert(ports.type == StringGroupType::PORT);
 
     if(!sdc_set_io_delay.target_ports.strings.empty()) {
@@ -143,7 +143,7 @@ void sdc_set_io_delay_set_ports(Callback& callback, const Lexer& lexer, SetIoDel
     sdc_set_io_delay.target_ports = ports;
 }
 
-void add_sdc_set_io_delay(Callback& callback, const Lexer& lexer, SetIoDelay& sdc_set_io_delay) {
+void add_sdc_set_io_delay(Callback& callback, const VHdc_Lexer& lexer, SetIoDelay& sdc_set_io_delay) {
     /*
      * Error checks
      */
@@ -168,7 +168,7 @@ void add_sdc_set_io_delay(Callback& callback, const Lexer& lexer, SetIoDelay& sd
 /*
  * Functions for set_clock_groups
  */
-void sdc_set_clock_groups_set_type(Callback& callback, const Lexer& lexer, SetClockGroups& sdc_set_clock_groups, ClockGroupsType type) {
+void sdc_set_clock_groups_set_type(Callback& callback, const VHdc_Lexer& lexer, SetClockGroups& sdc_set_clock_groups, ClockGroupsType type) {
     if(sdc_set_clock_groups.type != ClockGroupsType::NONE) {
         sdc_error_wrap(callback, lexer.lineno(), lexer.text(), "Can only specify a single clock groups relation type (e.g. '-exclusive')\n"); 
     }
@@ -176,14 +176,14 @@ void sdc_set_clock_groups_set_type(Callback& callback, const Lexer& lexer, SetCl
     sdc_set_clock_groups.type = type;
 }
 
-void sdc_set_clock_groups_add_group(Callback& /*callback*/, const Lexer& /*lexer*/, SetClockGroups& sdc_set_clock_groups, StringGroup clock_group) {
+void sdc_set_clock_groups_add_group(Callback& /*callback*/, const VHdc_Lexer& /*lexer*/, SetClockGroups& sdc_set_clock_groups, StringGroup clock_group) {
     assert(clock_group.type == StringGroupType::CLOCK || clock_group.type == StringGroupType::STRING);
 
     //Duplicate and insert the clock group
     sdc_set_clock_groups.clock_groups.push_back(clock_group);
 }
 
-void add_sdc_set_clock_groups(Callback& callback, const Lexer& lexer, SetClockGroups& sdc_set_clock_groups) {
+void add_sdc_set_clock_groups(Callback& callback, const VHdc_Lexer& lexer, SetClockGroups& sdc_set_clock_groups) {
     /*
      * Error checks
      */
@@ -204,7 +204,7 @@ void add_sdc_set_clock_groups(Callback& callback, const Lexer& lexer, SetClockGr
 /*
  * Functions for set_false_path
  */
-void sdc_set_false_path_add_to_from_group(Callback& callback, const Lexer& lexer, 
+void sdc_set_false_path_add_to_from_group(Callback& callback, const VHdc_Lexer& lexer, 
                                                             SetFalsePath& sdc_set_false_path, 
                                                             StringGroup group, 
                                                             FromToType to_from_dir) {
@@ -233,7 +233,7 @@ void sdc_set_false_path_add_to_from_group(Callback& callback, const Lexer& lexer
     }
 }
 
-void add_sdc_set_false_path(Callback& callback, const Lexer& /*lexer*/, SetFalsePath& sdc_set_false_path) {
+void add_sdc_set_false_path(Callback& callback, const VHdc_Lexer& /*lexer*/, SetFalsePath& sdc_set_false_path) {
     /*
      * Error checks
      */
@@ -248,14 +248,14 @@ void add_sdc_set_false_path(Callback& callback, const Lexer& /*lexer*/, SetFalse
 /*
  * Functions for set_max_delay/set_min_delay
  */
-void sdc_set_min_max_delay_set_value(Callback& callback, const Lexer& lexer, SetMinMaxDelay& sdc_set_min_max_delay, double min_max_delay) {
+void sdc_set_min_max_delay_set_value(Callback& callback, const VHdc_Lexer& lexer, SetMinMaxDelay& sdc_set_min_max_delay, double min_max_delay) {
     if(!std::isnan(sdc_set_min_max_delay.value)) {
         sdc_error_wrap(callback, lexer.lineno(), lexer.text(), "Must specify max delay value only once.\n"); 
     }
     sdc_set_min_max_delay.value = min_max_delay;
 }
 
-void sdc_set_min_max_delay_add_to_from_group(Callback& callback, const Lexer& lexer, SetMinMaxDelay& sdc_set_min_max_delay, StringGroup group, FromToType to_from_dir) {
+void sdc_set_min_max_delay_add_to_from_group(Callback& callback, const VHdc_Lexer& lexer, SetMinMaxDelay& sdc_set_min_max_delay, StringGroup group, FromToType to_from_dir) {
     assert(group.type == StringGroupType::CLOCK || group.type == StringGroupType::STRING);
 
     //Error checking
@@ -281,7 +281,7 @@ void sdc_set_min_max_delay_add_to_from_group(Callback& callback, const Lexer& le
     }
 }
 
-void add_sdc_set_min_max_delay(Callback& callback, const Lexer& lexer, SetMinMaxDelay& sdc_set_min_max_delay) {
+void add_sdc_set_min_max_delay(Callback& callback, const VHdc_Lexer& lexer, SetMinMaxDelay& sdc_set_min_max_delay) {
     /*
      * Error checks
      */
@@ -299,28 +299,28 @@ void add_sdc_set_min_max_delay(Callback& callback, const Lexer& lexer, SetMinMax
 /*
  * Functions for set_multicycle_path
  */
-void sdc_set_multicycle_path_set_setup(Callback& callback, const Lexer& lexer, SetMulticyclePath& sdc_set_multicycle_path) {
+void sdc_set_multicycle_path_set_setup(Callback& callback, const VHdc_Lexer& lexer, SetMulticyclePath& sdc_set_multicycle_path) {
     if(sdc_set_multicycle_path.is_setup) {
         sdc_error_wrap(callback, lexer.lineno(), lexer.text(), "'-setup' should only be specified once.\n"); 
     }
     sdc_set_multicycle_path.is_setup = true;
 }
 
-void sdc_set_multicycle_path_set_hold(Callback& callback, const Lexer& lexer, SetMulticyclePath& sdc_set_multicycle_path) {
+void sdc_set_multicycle_path_set_hold(Callback& callback, const VHdc_Lexer& lexer, SetMulticyclePath& sdc_set_multicycle_path) {
     if(sdc_set_multicycle_path.is_hold) {
         sdc_error_wrap(callback, lexer.lineno(), lexer.text(), "'-hold' should only be specified once.\n"); 
     }
     sdc_set_multicycle_path.is_hold = true;
 }
 
-void sdc_set_multicycle_path_set_mcp_value(Callback& callback, const Lexer& lexer, SetMulticyclePath& sdc_set_multicycle_path, int mcp_value) {
+void sdc_set_multicycle_path_set_mcp_value(Callback& callback, const VHdc_Lexer& lexer, SetMulticyclePath& sdc_set_multicycle_path, int mcp_value) {
     if(sdc_set_multicycle_path.mcp_value != UNINITIALIZED_INT) {
         sdc_error_wrap(callback, lexer.lineno(), lexer.text(), "Must specify multicycle path value only once.\n"); 
     }
     sdc_set_multicycle_path.mcp_value = mcp_value;
 }
 
-void sdc_set_multicycle_path_add_to_from_group(Callback& callback, const Lexer& lexer, SetMulticyclePath& sdc_set_multicycle_path, 
+void sdc_set_multicycle_path_add_to_from_group(Callback& callback, const VHdc_Lexer& lexer, SetMulticyclePath& sdc_set_multicycle_path, 
                                                                      StringGroup group, 
                                                                      FromToType to_from_dir) {
     assert(group.type == StringGroupType::CLOCK || group.type == StringGroupType::STRING || group.type == StringGroupType::PIN);
@@ -348,7 +348,7 @@ void sdc_set_multicycle_path_add_to_from_group(Callback& callback, const Lexer& 
     }
 }
 
-void add_sdc_set_multicycle_path(Callback& callback, const Lexer& lexer, SetMulticyclePath& sdc_set_multicycle_path) {
+void add_sdc_set_multicycle_path(Callback& callback, const VHdc_Lexer& lexer, SetMulticyclePath& sdc_set_multicycle_path) {
     /*
      * Error checks
      */
@@ -366,28 +366,28 @@ void add_sdc_set_multicycle_path(Callback& callback, const Lexer& lexer, SetMult
 /*
  * Functions for set_clock_uncertainty
  */
-void sdc_set_clock_uncertainty_set_setup(Callback& callback, const Lexer& lexer, SetClockUncertainty& sdc_set_clock_uncertainty) {
+void sdc_set_clock_uncertainty_set_setup(Callback& callback, const VHdc_Lexer& lexer, SetClockUncertainty& sdc_set_clock_uncertainty) {
     if(sdc_set_clock_uncertainty.is_setup) {
         sdc_error_wrap(callback, lexer.lineno(), lexer.text(), "'-setup' should only be specified once.\n"); 
     }
     sdc_set_clock_uncertainty.is_setup = true;
 }
 
-void sdc_set_clock_uncertainty_set_hold(Callback& callback, const Lexer& lexer, SetClockUncertainty& sdc_set_clock_uncertainty) {
+void sdc_set_clock_uncertainty_set_hold(Callback& callback, const VHdc_Lexer& lexer, SetClockUncertainty& sdc_set_clock_uncertainty) {
     if(sdc_set_clock_uncertainty.is_hold) {
         sdc_error_wrap(callback, lexer.lineno(), lexer.text(), "'-hold' should only be specified once.\n"); 
     }
     sdc_set_clock_uncertainty.is_hold = true;
 }
 
-void sdc_set_clock_uncertainty_set_value(Callback& callback, const Lexer& lexer, SetClockUncertainty& sdc_set_clock_uncertainty, float value) {
+void sdc_set_clock_uncertainty_set_value(Callback& callback, const VHdc_Lexer& lexer, SetClockUncertainty& sdc_set_clock_uncertainty, float value) {
     if(!std::isnan(sdc_set_clock_uncertainty.value)) {
         sdc_error_wrap(callback, lexer.lineno(), lexer.text(), "Must specify clock uncertainty value only once.\n"); 
     }
     sdc_set_clock_uncertainty.value = value;
 }
 
-void sdc_set_clock_uncertainty_add_to_from_group(Callback& callback, const Lexer& lexer, SetClockUncertainty& sdc_set_clock_uncertainty, 
+void sdc_set_clock_uncertainty_add_to_from_group(Callback& callback, const VHdc_Lexer& lexer, SetClockUncertainty& sdc_set_clock_uncertainty, 
                                                                      StringGroup group, 
                                                                      FromToType to_from_dir) {
     assert(group.type == StringGroupType::CLOCK || group.type == StringGroupType::STRING);
@@ -415,7 +415,7 @@ void sdc_set_clock_uncertainty_add_to_from_group(Callback& callback, const Lexer
     }
 }
 
-void add_sdc_set_clock_uncertainty(Callback& callback, const Lexer& lexer, SetClockUncertainty& sdc_set_clock_uncertainty) {
+void add_sdc_set_clock_uncertainty(Callback& callback, const VHdc_Lexer& lexer, SetClockUncertainty& sdc_set_clock_uncertainty) {
     /*
      * Error checks
      */
@@ -433,7 +433,7 @@ void add_sdc_set_clock_uncertainty(Callback& callback, const Lexer& lexer, SetCl
 /*
  * Functions for set_clock_latency
  */
-void sdc_set_clock_latency_set_type(Callback& callback, const Lexer& lexer, SetClockLatency& sdc_set_clock_latency, ClockLatencyType type) {
+void sdc_set_clock_latency_set_type(Callback& callback, const VHdc_Lexer& lexer, SetClockLatency& sdc_set_clock_latency, ClockLatencyType type) {
     //Error checking
     if(sdc_set_clock_latency.type != ClockLatencyType::NONE) {
         sdc_error_wrap(callback, lexer.lineno(), lexer.text(), "The latency type (e.g. '-source') can only be specified once.\n"); 
@@ -442,7 +442,7 @@ void sdc_set_clock_latency_set_type(Callback& callback, const Lexer& lexer, SetC
     sdc_set_clock_latency.type = type;
 }
 
-void sdc_set_clock_latency_early(Callback& callback, const Lexer& lexer, SetClockLatency& sdc_set_clock_latency) {
+void sdc_set_clock_latency_early(Callback& callback, const VHdc_Lexer& lexer, SetClockLatency& sdc_set_clock_latency) {
     //Error checking
     if(sdc_set_clock_latency.is_early) {
         sdc_error_wrap(callback, lexer.lineno(), lexer.text(), "The '-early' option can only be specified once.\n"); 
@@ -451,7 +451,7 @@ void sdc_set_clock_latency_early(Callback& callback, const Lexer& lexer, SetCloc
     sdc_set_clock_latency.is_early = true;
 }
 
-void sdc_set_clock_latency_late(Callback& callback, const Lexer& lexer, SetClockLatency& sdc_set_clock_latency) {
+void sdc_set_clock_latency_late(Callback& callback, const VHdc_Lexer& lexer, SetClockLatency& sdc_set_clock_latency) {
     //Error checking
     if(sdc_set_clock_latency.is_late) {
         sdc_error_wrap(callback, lexer.lineno(), lexer.text(), "The '-late' option can only be specified once.\n"); 
@@ -460,7 +460,7 @@ void sdc_set_clock_latency_late(Callback& callback, const Lexer& lexer, SetClock
     sdc_set_clock_latency.is_late = true;
 }
 
-void sdc_set_clock_latency_set_value(Callback& callback, const Lexer& lexer, SetClockLatency& sdc_set_clock_latency, float value) {
+void sdc_set_clock_latency_set_value(Callback& callback, const VHdc_Lexer& lexer, SetClockLatency& sdc_set_clock_latency, float value) {
     if(!std::isnan(sdc_set_clock_latency.value)) {
         sdc_error_wrap(callback, lexer.lineno(), lexer.text(), "The clock latency value can only be specified once.\n"); 
     }
@@ -468,7 +468,7 @@ void sdc_set_clock_latency_set_value(Callback& callback, const Lexer& lexer, Set
     sdc_set_clock_latency.value = value;
 }
 
-void sdc_set_clock_latency_set_clocks(Callback& callback, const Lexer& lexer, SetClockLatency& sdc_set_clock_latency, StringGroup target_clocks) {
+void sdc_set_clock_latency_set_clocks(Callback& callback, const VHdc_Lexer& lexer, SetClockLatency& sdc_set_clock_latency, StringGroup target_clocks) {
     if(target_clocks.type != StringGroupType::CLOCK) {
         sdc_error_wrap(callback, lexer.lineno(), lexer.text(), "Target clocks must be specified with 'get_clocks'.\n"); 
     }
@@ -476,7 +476,7 @@ void sdc_set_clock_latency_set_clocks(Callback& callback, const Lexer& lexer, Se
     sdc_set_clock_latency.target_clocks = target_clocks;
 }
 
-void add_sdc_set_clock_latency(Callback& callback, const Lexer& lexer, SetClockLatency& sdc_set_clock_latency) {
+void add_sdc_set_clock_latency(Callback& callback, const VHdc_Lexer& lexer, SetClockLatency& sdc_set_clock_latency) {
     /*
      * Error checks
      */
@@ -501,7 +501,7 @@ void add_sdc_set_clock_latency(Callback& callback, const Lexer& lexer, SetClockL
 /*
  * Functions for set_disable_timing
  */
-void sdc_set_disable_timing_add_to_from_group(Callback& callback, const Lexer& lexer, 
+void sdc_set_disable_timing_add_to_from_group(Callback& callback, const VHdc_Lexer& lexer, 
                                                             SetDisableTiming& sdc_set_disable_timing, 
                                                             StringGroup group, 
                                                             FromToType to_from_dir) {
@@ -533,7 +533,7 @@ void sdc_set_disable_timing_add_to_from_group(Callback& callback, const Lexer& l
     }
 }
 
-void add_sdc_set_disable_timing(Callback& callback, const Lexer& /*lexer*/, SetDisableTiming& sdc_set_disable_timing) {
+void add_sdc_set_disable_timing(Callback& callback, const VHdc_Lexer& /*lexer*/, SetDisableTiming& sdc_set_disable_timing) {
     /*
      * Error checks
      */
@@ -547,7 +547,7 @@ void add_sdc_set_disable_timing(Callback& callback, const Lexer& /*lexer*/, SetD
 /*
  * Functions for set_timing_derate
  */
-void sdc_set_timing_derate_early(Callback& callback, const Lexer& lexer, SetTimingDerate& sdc_set_timing_derate) {
+void sdc_set_timing_derate_early(Callback& callback, const VHdc_Lexer& lexer, SetTimingDerate& sdc_set_timing_derate) {
     if(sdc_set_timing_derate.is_early) {
         sdc_error_wrap(callback, lexer.lineno(), lexer.text(), "-early should only be specified once.\n"); 
     }
@@ -555,7 +555,7 @@ void sdc_set_timing_derate_early(Callback& callback, const Lexer& lexer, SetTimi
     sdc_set_timing_derate.is_early = true; 
 }
 
-void sdc_set_timing_derate_late(Callback& callback, const Lexer& lexer, SetTimingDerate& sdc_set_timing_derate) {
+void sdc_set_timing_derate_late(Callback& callback, const VHdc_Lexer& lexer, SetTimingDerate& sdc_set_timing_derate) {
     if(sdc_set_timing_derate.is_late) {
         sdc_error_wrap(callback, lexer.lineno(), lexer.text(), "-late should only be specified once.\n"); 
     }
@@ -563,7 +563,7 @@ void sdc_set_timing_derate_late(Callback& callback, const Lexer& lexer, SetTimin
     sdc_set_timing_derate.is_late = true; 
 }
 
-void sdc_set_timing_derate_target_type(Callback& callback, const Lexer& lexer, SetTimingDerate& sdc_set_timing_derate, TimingDerateTargetType target_type) {
+void sdc_set_timing_derate_target_type(Callback& callback, const VHdc_Lexer& lexer, SetTimingDerate& sdc_set_timing_derate, TimingDerateTargetType target_type) {
     if(target_type == TimingDerateTargetType::NET) {
         if(sdc_set_timing_derate.derate_nets) {
             sdc_error_wrap(callback, lexer.lineno(), lexer.text(), "-net_delay should only be specified once.\n"); 
@@ -579,7 +579,7 @@ void sdc_set_timing_derate_target_type(Callback& callback, const Lexer& lexer, S
     }
 }
 
-void sdc_set_timing_derate_value(Callback& callback, const Lexer& lexer, SetTimingDerate& sdc_set_timing_derate, float value) {
+void sdc_set_timing_derate_value(Callback& callback, const VHdc_Lexer& lexer, SetTimingDerate& sdc_set_timing_derate, float value) {
     if(!std::isnan(sdc_set_timing_derate.value)) {
         sdc_error_wrap(callback, lexer.lineno(), lexer.text(), "Only a single derate value per set_timing_derate command is allowed.\n"); 
     }
@@ -591,7 +591,7 @@ void sdc_set_timing_derate_value(Callback& callback, const Lexer& lexer, SetTimi
     sdc_set_timing_derate.value = value;
 }
 
-void sdc_set_timing_derate_targets(Callback& callback, const Lexer& lexer, SetTimingDerate& sdc_set_timing_derate, StringGroup targets) {
+void sdc_set_timing_derate_targets(Callback& callback, const VHdc_Lexer& lexer, SetTimingDerate& sdc_set_timing_derate, StringGroup targets) {
     if(targets.type != StringGroupType::CELL) {
         sdc_error_wrap(callback, lexer.lineno(), lexer.text(), "Only get_cells is supported with set_timing_derate.\n"); 
     }
@@ -603,7 +603,7 @@ void sdc_set_timing_derate_targets(Callback& callback, const Lexer& lexer, SetTi
     sdc_set_timing_derate.cell_targets = targets;
 }
 
-void add_sdc_set_timing_derate(Callback& callback, const Lexer& lexer, SetTimingDerate& sdc_set_timing_derate) {
+void add_sdc_set_timing_derate(Callback& callback, const VHdc_Lexer& lexer, SetTimingDerate& sdc_set_timing_derate) {
     /*
      * Error checks
      */
@@ -681,6 +681,27 @@ char* strndup(const char* src, size_t len) {
     new_str[len] = '\0';
 
     return new_str;
+}
+
+/* SGDC support */
+void add_sgdc_current_design(Callback &callback, const VHdc_Lexer& lexer, CurrentDesign& sgdc_current_design) {
+    /**
+     * Error Checking
+    */
+    if (sgdc_current_design.empty) {
+        sdc_error_wrap(callback, lexer.lineno(), lexer.text(), "The Current Design needs to be noted.\n");
+    }
+
+    /**
+     * Add command
+    */
+    callback.current_design(sgdc_current_design);
+}
+
+void sgdc_set_current_design(CurrentDesign &sgdc_current_design, const std::string& string) {
+    sgdc_current_design.current_design.type = StringGroupType::TOP; // 设置current_design
+    sgdc_current_design.current_design.strings.emplace_back(string);
+    sgdc_current_design.empty = false;
 }
 
 } //namespace

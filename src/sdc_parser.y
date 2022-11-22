@@ -34,7 +34,7 @@
 %define api.namespace {sdcparse}
 
 /* Name the parser class */
-%define parser_class_name {Parser}
+%define parser_class_name {VHdc_Parser}
 
 /* Match the flex prefix */
 %define api.prefix {sdcparse_}
@@ -60,23 +60,23 @@
 /* Generate a table of token names */
 %token-table
 
-%lex-param {Lexer& lexer}
-%parse-param {Lexer& lexer}
+%lex-param {VHdc_Lexer& lexer}
+%parse-param {VHdc_Lexer& lexer}
 %parse-param {Callback& callback}
 
 
 %code requires {
     #include <memory>
-    #include "sdcparse.hpp"
-    #include "sdc_lexer_fwd.hpp"
+    #include "../include/sdcparse.hpp"
+    #include "../include/sdc_lexer_fwd.hpp"
 }
 
 %code top {
-    #include "sdc_lexer.hpp"
+    #include "../include/sdc_lexer.hpp"
     //Bison calls sdcparse_lex() to get the next token.
-    //We use the Lexer class as the interface to the lexer, so we
+    //We use the VHdc_Lexer class as the interface to the lexer, so we
     //re-defined the function to tell Bison how to get the next token.
-    static sdcparse::Parser::symbol_type sdcparse_lex(sdcparse::Lexer& lexer) {
+    static sdcparse::VHdc_Parser::symbol_type sdcparse_lex(sdcparse::VHdc_Lexer& lexer) {
         return lexer.next_token();
     }
 }
@@ -86,9 +86,9 @@
 #include <stdio.h>
 #include "assert.h"
 
-#include "sdcparse.hpp"
-#include "sdc_common.hpp"
-#include "sdc_error.hpp"
+#include "../include/sdcparse.hpp"
+#include "../include/sdc_common.hpp"
+#include "../include/sdc_error.hpp"
 
 using namespace sdcparse;
 
@@ -107,6 +107,8 @@ using namespace sdcparse;
 %token CMD_SET_CLOCK_LATENCY "set_clock_latency"
 %token CMD_SET_DISABLE_TIMING "set_disable_timing"
 %token CMD_SET_TIMING_DERATE "set_timing_derate"
+
+%token CMD_CURRENT_DESIGN "current_design"
 
 %token CMD_GET_PORTS "get_ports"
 %token CMD_GET_CLOCKS "get_clocks"
@@ -163,6 +165,8 @@ using namespace sdcparse;
 %type <SetDisableTiming> cmd_set_disable_timing
 %type <SetTimingDerate> cmd_set_timing_derate
 
+%type <CurrentDesign> cmd_current_design
+
 %type <StringGroup> stringGroup cmd_get_ports cmd_get_clocks cmd_get_cells cmd_get_pins
 
 /* Top level rule */
@@ -171,18 +175,19 @@ using namespace sdcparse;
 %%
 
 sdc_commands:                                    { }
-    | sdc_commands cmd_create_clock EOL          { callback.lineno(lexer.lineno()-1); add_sdc_create_clock(callback, lexer, $2); }
-    | sdc_commands cmd_set_input_delay EOL       { callback.lineno(lexer.lineno()-1); add_sdc_set_io_delay(callback, lexer, $2); }
-    | sdc_commands cmd_set_output_delay EOL      { callback.lineno(lexer.lineno()-1); add_sdc_set_io_delay(callback, lexer, $2); }
-    | sdc_commands cmd_set_clock_groups EOL      { callback.lineno(lexer.lineno()-1); add_sdc_set_clock_groups(callback, lexer, $2); }
-    | sdc_commands cmd_set_false_path EOL        { callback.lineno(lexer.lineno()-1); add_sdc_set_false_path(callback, lexer, $2); }
-    | sdc_commands cmd_set_max_delay EOL         { callback.lineno(lexer.lineno()-1); add_sdc_set_min_max_delay(callback, lexer, $2); }
-    | sdc_commands cmd_set_min_delay EOL         { callback.lineno(lexer.lineno()-1); add_sdc_set_min_max_delay(callback, lexer, $2); }
-    | sdc_commands cmd_set_multicycle_path EOL   { callback.lineno(lexer.lineno()-1); add_sdc_set_multicycle_path(callback, lexer, $2); }
-    | sdc_commands cmd_set_clock_uncertainty EOL { callback.lineno(lexer.lineno()-1); add_sdc_set_clock_uncertainty(callback, lexer, $2); }
-    | sdc_commands cmd_set_clock_latency EOL     { callback.lineno(lexer.lineno()-1); add_sdc_set_clock_latency(callback, lexer, $2); }
-    | sdc_commands cmd_set_disable_timing EOL    { callback.lineno(lexer.lineno()-1); add_sdc_set_disable_timing(callback, lexer, $2); }
-    | sdc_commands cmd_set_timing_derate EOL     { callback.lineno(lexer.lineno()-1); add_sdc_set_timing_derate(callback, lexer, $2); }
+    | sdc_commands cmd_create_clock EOL          { callback.lineno(lexer.lineno()); add_sdc_create_clock(callback, lexer, $2); }
+    | sdc_commands cmd_set_input_delay EOL       { callback.lineno(lexer.lineno()); add_sdc_set_io_delay(callback, lexer, $2); }
+    | sdc_commands cmd_set_output_delay EOL      { callback.lineno(lexer.lineno()); add_sdc_set_io_delay(callback, lexer, $2); }
+    | sdc_commands cmd_set_clock_groups EOL      { callback.lineno(lexer.lineno()); add_sdc_set_clock_groups(callback, lexer, $2); }
+    | sdc_commands cmd_set_false_path EOL        { callback.lineno(lexer.lineno()); add_sdc_set_false_path(callback, lexer, $2); }
+    | sdc_commands cmd_set_max_delay EOL         { callback.lineno(lexer.lineno()); add_sdc_set_min_max_delay(callback, lexer, $2); }
+    | sdc_commands cmd_set_min_delay EOL         { callback.lineno(lexer.lineno()); add_sdc_set_min_max_delay(callback, lexer, $2); }
+    | sdc_commands cmd_set_multicycle_path EOL   { callback.lineno(lexer.lineno()); add_sdc_set_multicycle_path(callback, lexer, $2); }
+    | sdc_commands cmd_set_clock_uncertainty EOL { callback.lineno(lexer.lineno()); add_sdc_set_clock_uncertainty(callback, lexer, $2); }
+    | sdc_commands cmd_set_clock_latency EOL     { callback.lineno(lexer.lineno()); add_sdc_set_clock_latency(callback, lexer, $2); }
+    | sdc_commands cmd_set_disable_timing EOL    { callback.lineno(lexer.lineno()); add_sdc_set_disable_timing(callback, lexer, $2); }
+    | sdc_commands cmd_set_timing_derate EOL     { callback.lineno(lexer.lineno()); add_sdc_set_timing_derate(callback, lexer, $2); }
+    | sdc_commands cmd_current_design EOL        { callback.lineno(lexer.lineno()); add_sgdc_current_design(callback, lexer, $2); }
     | sdc_commands EOL                           { /* Eat stray EOL symbols */ }
     ;
 
@@ -346,6 +351,10 @@ cmd_set_timing_derate: CMD_SET_TIMING_DERATE    { $$ = SetTimingDerate(); }
     | cmd_set_timing_derate LSPAR cmd_get_cells RSPAR { $$ = $1; sdc_set_timing_derate_targets(callback, lexer, $$, $3); }
     ;
 
+cmd_current_design: CMD_CURRENT_DESIGN           { $$ = CurrentDesign(); }
+    | cmd_current_design string                  { $$ = $1; sgdc_set_current_design($$, $2); }
+    ;
+
 cmd_get_ports: CMD_GET_PORTS            { $$ = StringGroup(StringGroupType::PORT); }
     | cmd_get_ports LCPAR stringGroup RCPAR { $$ = $1; sdc_string_group_add_strings($$, $3); }
     | cmd_get_ports string              { $$ = $1; sdc_string_group_add_string($$, $2); }
@@ -387,6 +396,6 @@ int_number: INT_NUMBER { $$ = $1; }
 %%
 
 
-void sdcparse::Parser::error(const std::string& msg) {
+void sdcparse::VHdc_Parser::error(const std::string& msg) {
     sdc_error_wrap(callback, lexer.lineno(), lexer.text(), msg.c_str());
 }

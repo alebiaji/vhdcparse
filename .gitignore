@@ -1,4 +1,5 @@
 build
+gen
 sdcparse_test
 libsdcparse.a
 obj/

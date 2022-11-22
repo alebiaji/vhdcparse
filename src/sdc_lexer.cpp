@@ -1,4 +1,4 @@
-#include "sdc_lexer.hpp"
+#include "../include/sdc_lexer.hpp"
 
 //Windows doesn't have unistd.h, so we set '%option nounistd' 
 //in sdc_lexer.l, but flex still includes it in the generated 
@@ -10,25 +10,25 @@ extern YY_DECL; //For sdcparse_lex()
 
 namespace sdcparse {
 
-Lexer::Lexer(FILE* file, Callback& callback)
+VHdc_Lexer::VHdc_Lexer(FILE* file, Callback& callback)
     : callback_(callback) {
     sdcparse_lex_init(&state_);
     sdcparse_set_in(file, state_);
 }
 
-Lexer::~Lexer() {
+VHdc_Lexer::~VHdc_Lexer() {
     sdcparse_lex_destroy(state_);
 }
 
-Parser::symbol_type Lexer::next_token() {
+VHdc_Parser::symbol_type VHdc_Lexer::next_token() {
     return sdcparse_lex(state_, callback_);
 }
 
-const char* Lexer::text() const {
+const char* VHdc_Lexer::text() const {
     return sdcparse_get_text(state_);
 }
 
-int Lexer::lineno() const {
+int VHdc_Lexer::lineno() const {
     return sdcparse_get_lineno(state_);
 }
 
