@@ -15,7 +15,7 @@ int main(int argc, char **argv) {
     }
 
     PrintCallback callback;
-    sdc_parse_filename(argv[1], callback);
+    callback.BeginParse(argv[1]);
 
     if(callback.error()) {
         return 1;
