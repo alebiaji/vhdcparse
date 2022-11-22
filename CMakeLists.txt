@@ -7,18 +7,15 @@ project("libvhdcparse")
 
 if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR})
     #Only set compiler settings if we are not a sub-project
-
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++14") 
-    #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fsanitize=leak -fsanitize=undefined") 
-    # set(FLEX_BISON_WARN_SUPPRESS_FLAGS "-Wno-switch-default -Wno-unused-parameter -Wno-missing-declarations")
 endif()
 
 #Flex and Bison are used to generate the parser
 # find_package(BISON REQUIRED 3.0)
 # find_package(FLEX REQUIRED)
 
-file(GLOB_RECURSE LIB_SOURCES src/sdc*.cpp)
-file(GLOB_RECURSE LIB_HEADERS include/sdc*.hpp)
+file(GLOB_RECURSE LIB_SOURCES src/sdc*.cpp src/callback.cpp)
+file(GLOB_RECURSE LIB_HEADERS include/sdc*.hpp include/callback.hpp)
 headers_to_include_dirs(LIB_HEADERS LIB_INCLUDE_DIRS)
 
 #Find the flex and bison input files
@@ -52,21 +49,21 @@ target_include_directories(libvhdcparse PUBLIC ${LIB_INCLUDE_DIRS} ${CMAKE_CURRE
 set_target_properties(libvhdcparse PROPERTIES PREFIX "") #Avoid extra 'lib' prefix
 
 #Create the test executable
-# add_executable(sdcparse_test src/main.cpp)
-# target_link_libraries(sdcparse_test libvhdcparse)
+add_executable(vhdcparse_test src/main.cpp)
+target_link_libraries(vhdcparse_test libvhdcparse)
 
 #Suppress IPO link warnings
-# get_target_property(USES_IPO sdcparse_test INTERPROCEDURAL_OPTIMIZATION)
-# if (USES_IPO)
-#     set(IPO_LINK_WARN_FLAGS_TO_CHECK "-Wno-null-dereference")
-#     foreach(flag ${IPO_LINK_WARN_FLAGS_TO_CHECK})
-#         CHECK_CXX_COMPILER_FLAG(${flag} CXX_COMPILER_SUPPORTS_${flag})
-#         if(CXX_COMPILER_SUPPORTS_${flag})
-#             #Flag supported, so enable it
-#             set_target_properties(sdcparse_test PROPERTIES LINK_FLAGS ${flag})
-#         endif()
-#     endforeach()
-# endif()
+get_target_property(USES_IPO vhdcparse_test INTERPROCEDURAL_OPTIMIZATION)
+if (USES_IPO)
+    set(IPO_LINK_WARN_FLAGS_TO_CHECK "-Wno-null-dereference")
+    foreach(flag ${IPO_LINK_WARN_FLAGS_TO_CHECK})
+        CHECK_CXX_COMPILER_FLAG(${flag} CXX_COMPILER_SUPPORTS_${flag})
+        if(CXX_COMPILER_SUPPORTS_${flag})
+            #Flag supported, so enable it
+            set_target_properties(vhdcparse_test PROPERTIES LINK_FLAGS ${flag})
+        endif()
+    endforeach()
+endif()
 
 install(TARGETS libvhdcparse DESTINATION lib)
-# install(TARGETS sdcparse_test DESTINATION bin)
+install(TARGETS vhdcparse_test DESTINATION bin)
