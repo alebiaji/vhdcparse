@@ -692,6 +692,8 @@ void add_sgdc_current_design(Callback &callback, const VHdc_Lexer& lexer, Curren
         sdc_error_wrap(callback, lexer.lineno(), lexer.text(), "The Current Design needs to be noted.\n");
     }
 
+    assert(sgdc_current_design.current_design.type == StringGroupType::TOP);
+
     /**
      * Add command
     */
