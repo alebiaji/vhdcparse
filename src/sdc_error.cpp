@@ -1,7 +1,7 @@
 #include <cstdarg>
 #include <cassert>
 #include "../include/sdc_error.hpp"
-#include "../include/sdcparse.hpp"
+#include "../include/vhdcparse.hpp"
 
 namespace vhdcparse {
 

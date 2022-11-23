@@ -2,7 +2,7 @@
 #define __CALLBACK_HPP__
 
 #include <iostream>
-#include "../include/sdcparse.hpp"
+#include "../include/vhdcparse.hpp"
 
 using namespace vhdcparse;
 

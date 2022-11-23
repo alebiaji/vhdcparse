@@ -67,7 +67,7 @@
 
 %code requires {
     #include <memory>
-    #include "../include/sdcparse.hpp"
+    #include "../include/vhdcparse.hpp"
     #include "../include/sdc_lexer_fwd.hpp"
 }
 
@@ -86,7 +86,7 @@
 #include <stdio.h>
 #include "assert.h"
 
-#include "../include/sdcparse.hpp"
+#include "../include/vhdcparse.hpp"
 #include "../include/sdc_common.hpp"
 #include "../include/sdc_error.hpp"
 

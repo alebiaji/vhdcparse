@@ -941,7 +941,7 @@ static const flex_int32_t yy_rule_can_match_eol[49] =
     /*
      * Include Files
      */
-    #include "../include/sdcparse.hpp"
+    #include "../include/vhdcparse.hpp"
     #include "../include/sdc_common.hpp"
     #include "../include/sdc_error.hpp"
 

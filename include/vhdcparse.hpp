@@ -1,5 +1,5 @@
-#ifndef SDC_H
-#define SDC_H
+#ifndef __VHDCPARSE_H__
+#define __VHDCPARSE_H__
 /*
  * libvhdcparse - Kevin E. Murray 2014
  *
@@ -117,6 +117,7 @@ class Callback {
         //Sets current line number
         virtual void lineno(int line_num) = 0;
 
+        // SDC support
         virtual void create_clock(const CreateClock& cmd) = 0;
         virtual void set_io_delay(const SetIoDelay& cmd) = 0;
         virtual void set_clock_groups(const SetClockGroups& cmd) = 0;
@@ -130,6 +131,7 @@ class Callback {
 
         // SGDC support
         virtual void current_design(const CurrentDesign& cmd) = 0;
+        virtual void clock(const Clock& cmd) = 0;
 
         //End of parsing
         virtual void finish_parse() = 0;
@@ -323,6 +325,12 @@ struct SetTimingDerate {
 struct CurrentDesign {
     bool empty = true;
     StringGroup current_design;                 // current design name
+};
+
+struct Clock {
+    std::string clock_name = "";
+    StringGroup clock_domian;
+    StringGroup clock_tag;
 };
 
 } //namespace

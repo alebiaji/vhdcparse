@@ -1,7 +1,7 @@
 #ifndef SDC_COMMON_HPP
 #define SDC_COMMON_HPP
 
-#include "sdcparse.hpp"
+#include "vhdcparse.hpp"
 #include "sdc_lexer.hpp"
 
 namespace vhdcparse {

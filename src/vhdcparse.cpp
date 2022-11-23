@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "../include/sdcparse.hpp"
+#include "../include/vhdcparse.hpp"
 #include "../include/sdc_common.hpp"
 
 #include "../include/sdc_lexer.hpp"

@@ -1,6 +1,6 @@
 #ifndef SDC_ERROR_H
 #define SDC_ERROR_H
-#include "sdcparse.hpp"
+#include "vhdcparse.hpp"
 
 namespace vhdcparse {
     void sdc_error_wrap(Callback& callback, const int line_no, const std::string& near_text, const char* fmt, ...);

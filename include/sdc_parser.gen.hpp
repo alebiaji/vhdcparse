@@ -43,7 +43,7 @@
 #line 68 "/home/ale/git/VHawk/third_party/sdcparse/src/sdc_parser.y" // lalr1.cc:377
 
     #include <memory>
-    #include "../include/sdcparse.hpp"
+    #include "../include/vhdcparse.hpp"
     #include "../include/sdc_lexer_fwd.hpp"
 
 #line 50 "/home/ale/git/VHawk/third_party/sdcparse/gen/sdc_parser.gen.hpp" // lalr1.cc:377
