@@ -141,7 +141,7 @@ class Callback {
 };
 
 /*
- * External functions for loading an SDC file
+ * External functions for loading an SDC/SGDC file
  */
 void sdc_parse_filename(std::string filename, Callback& callback);
 void sdc_parse_filename(const char* filename, Callback& callback);
