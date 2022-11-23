@@ -150,6 +150,10 @@ void PrintCallback::current_design(const CurrentDesign& cmd) {
     }
 }
 
+// void PrintCallback::clock (const Clock& cmd) {
+    
+// }
+
 //Error during parsing
 void PrintCallback::parse_error(const int curr_lineno, const std::string& near_text, const std::string& msg) {
     fprintf(stderr, "Custom Error");

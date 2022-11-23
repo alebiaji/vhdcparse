@@ -41,6 +41,7 @@ public:
     void set_disable_timing     (const SetDisableTiming&    cmd);
     void set_timing_derate      (const SetTimingDerate&     cmd);
     void current_design         (const CurrentDesign&       cmd);
+    // void clock                  (const Clock&               cmd);
 
     //End of parsing
     void finish_parse() { }

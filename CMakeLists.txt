@@ -11,33 +11,28 @@ if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR})
 endif()
 
 #Flex and Bison are used to generate the parser
-# find_package(BISON REQUIRED 3.0)
-# find_package(FLEX REQUIRED)
+find_package(BISON REQUIRED 3.0)
+find_package(FLEX REQUIRED)
 
-file(GLOB_RECURSE LIB_SOURCES src/vhdcparse.cpp src/sdc*.cpp src/callback.cpp)
-file(GLOB_RECURSE LIB_HEADERS src/vhdcparse.hpp include/sdc*.hpp include/callback.hpp)
+file(GLOB_RECURSE LIB_SOURCES src/vhdcparse.cpp src/*.cpp gen/*.cpp)
+file(GLOB_RECURSE LIB_HEADERS src/vhdcparse.hpp include/*.hpp gen/*.hpp)
 headers_to_include_dirs(LIB_HEADERS LIB_INCLUDE_DIRS)
 
 #Find the flex and bison input files
-# file(GLOB_RECURSE LEXER_SOURCES src/sdc*.l)
-# file(GLOB_RECURSE PARSER_SOURCES src/sdc*.y)
+file(GLOB_RECURSE LEXER_SOURCES gen/*.l)
+file(GLOB_RECURSE PARSER_SOURCES gen/*.y)
 
 #Make the flex and bison targets
-# flex_target(SdcLexer ${LEXER_SOURCES} ${GEN_PATH}/sdc_lexer.gen.cpp
-#         COMPILE_FLAGS --header-file=${GEN_PATH}/sdc_lexer.gen.hpp)
-# bison_target(SdcParser ${PARSER_SOURCES} ${GEN_PATH}/sdc_parser.gen.cpp)
-# add_flex_bison_dependency(SdcLexer SdcParser)
+flex_target(SdcLexer ${LEXER_SOURCES} ${GEN_PATH}/sdc_lexer.gen.cpp
+        COMPILE_FLAGS --header-file=${GEN_PATH}/sdc_lexer.gen.hpp)
+bison_target(SdcParser ${PARSER_SOURCES} ${GEN_PATH}/sdc_parser.gen.cpp)
+add_flex_bison_dependency(SdcLexer SdcParser)
 
 
 #Treat .c as CXX
-# set_source_files_properties(${LIB_SOURCES} ${FLEX_SdcLexer_OUTPUTS} ${BISON_SdcParser_OUTPUT_SOURCE} PROPERTIES LANGUAGE CXX)
+set_source_files_properties(${LIB_SOURCES} ${FLEX_SdcLexer_OUTPUTS} ${BISON_SdcParser_OUTPUT_SOURCE} PROPERTIES LANGUAGE CXX)
 set_source_files_properties(${LIB_SOURCES} PROPERTIES LANGUAGE CXX)
 
-#Suppress warnings in Flex/Bison generated files
-# if(FLEX_BISON_WARN_SUPPRESS_FLAGS)
-#     set_source_files_properties(${FLEX_SdcLexer_OUTPUTS} ${BISON_SdcParser_OUTPUT_SOURCE}
-#                                 PROPERTIES COMPILE_FLAGS ${FLEX_BISON_WARN_SUPPRESS_FLAGS})
-# endif()
 
 #Create the library
 add_library(libvhdcparse STATIC

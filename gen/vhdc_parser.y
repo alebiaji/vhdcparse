@@ -31,13 +31,13 @@
 /*%define api.pure full*/
 
 /* Wrap everything in our namespace */
-%define api.namespace {sdcparse}
+%define api.namespace {vhdcparse}
 
 /* Name the parser class */
 %define parser_class_name {VHdc_Parser}
 
 /* Match the flex prefix */
-%define api.prefix {sdcparse_}
+%define api.prefix {vhdcparse_}
 
 /* Extra checks for correct usage */
 %define parse.assert
@@ -73,10 +73,10 @@
 
 %code top {
     #include "../include/sdc_lexer.hpp"
-    //Bison calls sdcparse_lex() to get the next token.
+    //Bison calls vhdcparse_lex() to get the next token.
     //We use the VHdc_Lexer class as the interface to the lexer, so we
     //re-defined the function to tell Bison how to get the next token.
-    static vhdcparse::VHdc_Parser::symbol_type sdcparse_lex(vhdcparse::VHdc_Lexer& lexer) {
+    static vhdcparse::VHdc_Parser::symbol_type vhdcparse_lex(vhdcparse::VHdc_Lexer& lexer) {
         return lexer.next_token();
     }
 }
@@ -107,8 +107,6 @@ using namespace vhdcparse;
 %token CMD_SET_CLOCK_LATENCY "set_clock_latency"
 %token CMD_SET_DISABLE_TIMING "set_disable_timing"
 %token CMD_SET_TIMING_DERATE "set_timing_derate"
-
-%token CMD_CURRENT_DESIGN "current_design"
 
 %token CMD_GET_PORTS "get_ports"
 %token CMD_GET_CLOCKS "get_clocks"
@@ -148,12 +146,16 @@ using namespace vhdcparse;
 %token <float> FLOAT_NUMBER
 %token <int> INT_NUMBER
 
+%token CMD_CURRENT_DESIGN "current_design"
+// %token CMD_CLOCK "clock"
+
 /* declare types */
 %type <std::string> string
 %type <float> number
 %type <float> float_number
 %type <int> int_number
 
+/* SDC support */
 %type <CreateClock> cmd_create_clock
 %type <SetIoDelay> cmd_set_input_delay cmd_set_output_delay
 %type <SetClockGroups> cmd_set_clock_groups
@@ -165,30 +167,33 @@ using namespace vhdcparse;
 %type <SetDisableTiming> cmd_set_disable_timing
 %type <SetTimingDerate> cmd_set_timing_derate
 
+/* SGDC support */
 %type <CurrentDesign> cmd_current_design
+// %type <Clock> cmd_clock
 
 %type <StringGroup> stringGroup cmd_get_ports cmd_get_clocks cmd_get_cells cmd_get_pins
 
 /* Top level rule */
-%start sdc_commands
+%start vhdc_commands
 
 %%
 
-sdc_commands:                                    { }
-    | sdc_commands cmd_create_clock EOL          { callback.lineno(lexer.lineno()); add_sdc_create_clock(callback, lexer, $2); }
-    | sdc_commands cmd_set_input_delay EOL       { callback.lineno(lexer.lineno()); add_sdc_set_io_delay(callback, lexer, $2); }
-    | sdc_commands cmd_set_output_delay EOL      { callback.lineno(lexer.lineno()); add_sdc_set_io_delay(callback, lexer, $2); }
-    | sdc_commands cmd_set_clock_groups EOL      { callback.lineno(lexer.lineno()); add_sdc_set_clock_groups(callback, lexer, $2); }
-    | sdc_commands cmd_set_false_path EOL        { callback.lineno(lexer.lineno()); add_sdc_set_false_path(callback, lexer, $2); }
-    | sdc_commands cmd_set_max_delay EOL         { callback.lineno(lexer.lineno()); add_sdc_set_min_max_delay(callback, lexer, $2); }
-    | sdc_commands cmd_set_min_delay EOL         { callback.lineno(lexer.lineno()); add_sdc_set_min_max_delay(callback, lexer, $2); }
-    | sdc_commands cmd_set_multicycle_path EOL   { callback.lineno(lexer.lineno()); add_sdc_set_multicycle_path(callback, lexer, $2); }
-    | sdc_commands cmd_set_clock_uncertainty EOL { callback.lineno(lexer.lineno()); add_sdc_set_clock_uncertainty(callback, lexer, $2); }
-    | sdc_commands cmd_set_clock_latency EOL     { callback.lineno(lexer.lineno()); add_sdc_set_clock_latency(callback, lexer, $2); }
-    | sdc_commands cmd_set_disable_timing EOL    { callback.lineno(lexer.lineno()); add_sdc_set_disable_timing(callback, lexer, $2); }
-    | sdc_commands cmd_set_timing_derate EOL     { callback.lineno(lexer.lineno()); add_sdc_set_timing_derate(callback, lexer, $2); }
-    | sdc_commands cmd_current_design EOL        { callback.lineno(lexer.lineno()); add_sgdc_current_design(callback, lexer, $2); }
-    | sdc_commands EOL                           { /* Eat stray EOL symbols */ }
+vhdc_commands:                                    { }
+    | vhdc_commands cmd_create_clock EOL          { callback.lineno(lexer.lineno()); add_sdc_create_clock(callback, lexer, $2); }
+    | vhdc_commands cmd_set_input_delay EOL       { callback.lineno(lexer.lineno()); add_sdc_set_io_delay(callback, lexer, $2); }
+    | vhdc_commands cmd_set_output_delay EOL      { callback.lineno(lexer.lineno()); add_sdc_set_io_delay(callback, lexer, $2); }
+    | vhdc_commands cmd_set_clock_groups EOL      { callback.lineno(lexer.lineno()); add_sdc_set_clock_groups(callback, lexer, $2); }
+    | vhdc_commands cmd_set_false_path EOL        { callback.lineno(lexer.lineno()); add_sdc_set_false_path(callback, lexer, $2); }
+    | vhdc_commands cmd_set_max_delay EOL         { callback.lineno(lexer.lineno()); add_sdc_set_min_max_delay(callback, lexer, $2); }
+    | vhdc_commands cmd_set_min_delay EOL         { callback.lineno(lexer.lineno()); add_sdc_set_min_max_delay(callback, lexer, $2); }
+    | vhdc_commands cmd_set_multicycle_path EOL   { callback.lineno(lexer.lineno()); add_sdc_set_multicycle_path(callback, lexer, $2); }
+    | vhdc_commands cmd_set_clock_uncertainty EOL { callback.lineno(lexer.lineno()); add_sdc_set_clock_uncertainty(callback, lexer, $2); }
+    | vhdc_commands cmd_set_clock_latency EOL     { callback.lineno(lexer.lineno()); add_sdc_set_clock_latency(callback, lexer, $2); }
+    | vhdc_commands cmd_set_disable_timing EOL    { callback.lineno(lexer.lineno()); add_sdc_set_disable_timing(callback, lexer, $2); }
+    | vhdc_commands cmd_set_timing_derate EOL     { callback.lineno(lexer.lineno()); add_sdc_set_timing_derate(callback, lexer, $2); }
+    | vhdc_commands cmd_current_design EOL        { callback.lineno(lexer.lineno()); add_sgdc_current_design(callback, lexer, $2); }
+    // | vhdc_commands cmd_clock EOL                 { callback.lineno(lexer.lineno()); add_sgdc_clock(callback, lexer, $2); }
+    | vhdc_commands EOL                           { /* Eat stray EOL symbols */ }
     ;
 
 cmd_create_clock: CMD_CREATE_CLOCK                          { $$ = CreateClock(); }
@@ -354,6 +359,9 @@ cmd_set_timing_derate: CMD_SET_TIMING_DERATE    { $$ = SetTimingDerate(); }
 cmd_current_design: CMD_CURRENT_DESIGN           { $$ = CurrentDesign(); }
     | cmd_current_design string                  { $$ = $1; sgdc_set_current_design($$, $2); }
     ;
+
+// cmd_clock: CMD_CLOCK                             { $$ = Clock(); }
+//     | cmd_clock
 
 cmd_get_ports: CMD_GET_PORTS            { $$ = StringGroup(StringGroupType::PORT); }
     | cmd_get_ports LCPAR stringGroup RCPAR { $$ = $1; sdc_string_group_add_strings($$, $3); }

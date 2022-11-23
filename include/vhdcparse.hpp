@@ -59,12 +59,12 @@
  *             (in sdc_common.c) that is called by the first rule e.g.:
  *                cmd_set_time_format: CMD_SET_TIME_FORMAT {$$ = alloc_sdc_set_time_units();}
  *          c) Add options to the command as outlined in (1)
- *          d) Create an add_sdc*() command and extend the s_sdc_commands struct to include 
- *             the new command.  Call it in the top level sdc_commands rule e.g.:
+ *          d) Create an add_sdc*() command and extend the s_vhdc_commands struct to include 
+ *             the new command.  Call it in the top level vhdc_commands rule e.g.:
  *
- *                sdc_commands: ...
+ *                vhdc_commands: ...
  *                   | ... //Other commands
- *                   | sdc_commands cmd_set_time_format EOL {$$ = add_sdc_set_time_format($1, $2); }
+ *                   | vhdc_commands cmd_set_time_format EOL {$$ = add_sdc_set_time_format($1, $2); }
  *
  */
 #include <vector>
@@ -98,7 +98,7 @@ struct SetTimingDerate;
  * Support For SGDC
 */
 struct CurrentDesign;
-struct Clock;
+// struct Clock;
 
 struct StringGroup;
 
@@ -131,7 +131,7 @@ class Callback {
 
         // SGDC support
         virtual void current_design(const CurrentDesign& cmd) = 0;
-        virtual void clock(const Clock& cmd) = 0;
+        // virtual void clock(const Clock& cmd) = 0;
 
         //End of parsing
         virtual void finish_parse() = 0;
@@ -327,11 +327,11 @@ struct CurrentDesign {
     StringGroup current_design;                 // current design name
 };
 
-struct Clock {
-    std::string clock_name = "";
-    StringGroup clock_domian;
-    StringGroup clock_tag;
-};
+// struct Clock {
+//     std::string clock_name = "";
+//     StringGroup clock_domian;
+//     StringGroup clock_tag;
+// };
 
 } //namespace
 
