@@ -14,8 +14,8 @@ endif()
 # find_package(BISON REQUIRED 3.0)
 # find_package(FLEX REQUIRED)
 
-file(GLOB_RECURSE LIB_SOURCES src/sdc*.cpp src/callback.cpp)
-file(GLOB_RECURSE LIB_HEADERS include/sdc*.hpp include/callback.hpp)
+file(GLOB_RECURSE LIB_SOURCES src/vhdcparse.cpp src/sdc*.cpp src/callback.cpp)
+file(GLOB_RECURSE LIB_HEADERS src/vhdcparse.hpp include/sdc*.hpp include/callback.hpp)
 headers_to_include_dirs(LIB_HEADERS LIB_INCLUDE_DIRS)
 
 #Find the flex and bison input files
